@@ -1,0 +1,8 @@
+The layout for this simple toolki goes as follows
+
+Toolkit.py > /Scripts.py/ > Tools
+
+Credit where credit is due:
+-SQLMAP
+-Nikto 
+-DNSCRYPT
