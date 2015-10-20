@@ -1,8 +1,23 @@
-The layout for this simple toolki goes as follows
+--------------------
+NoobSecToolkit v1
+--------------------
+This is meant to be a "script kiddie" friendly Toolkit that brings tools like Nikto,SQLMAP, Theharvester together all in 1 with predefined security configurations and modifications.
 
-Toolkit.py > /Scripts.py/ > Tools
+The layout for this simple Toolkit goes as follows:
+
+(1)Toolkit.py -> (2)/Scripts.py/ -> (3)Tools
+
+----------------------
+Install Instructions
+----------------------
+(1) CTRL + ALT + T (Open Terminal)
+(2) git clone https://github.com/krintoxi/NoobSecToolkit.git
+(3) cd /NoobSecToolkit/NoobSecToolkit/
+(4) python SecuritToolkit.py
+(5) Enjoy :)
 
 Credit where credit is due:
 -SQLMAP
--Nikto 
+-Nikto
 -DNSCRYPT
+@Zick from Cybrary.it
