@@ -6,9 +6,7 @@ import sys, traceback
 print"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 print"NOOB Security Toolkit 2.0 - BETA"
 print"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-print"Dev: The_Chosen_One, TheAndreiM "
-print"https://github.com/krintoxi"
-print"https://github.com/JuliarLang"
+print"Dev: The_Chosen_One"
 print"~~~~~~~~~~~~~~~~~~~"
 #End Of Title Area
 #Start Of Options 
@@ -82,6 +80,8 @@ def loopfunc():
 		cmd1 = os.system ("sudo git clone git://github.com/simonclausen/dnscrypt-autoinstall.git dloads/")	
 		cmd1 = os.system ("cd scripts/")	
 		cmd1 = os.system ("./dloads/dnscrypt-autoinstall.sh")
+
+
 	if choice == "exit" or choice == "quit" or choice == "q":
 		sys.exit()
 	else:
