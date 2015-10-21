@@ -35,7 +35,7 @@ def loopfunc():
 	choice = raw_input("What do you want to do?:")
 
 	if choice == "sqli":
-		print "Launching SQLI Injector....c"
+		print "Launching SQLI Injector...."
 		cmd1 = os.system ("sudo python scripts/sqli.py")
 		
 	if choice == "vulscan":
