@@ -12,7 +12,7 @@ Install Instructions
 ----------------------
 (1) CTRL + ALT + T (Open Terminal)
 (2) git clone https://github.com/krintoxi/NoobSecToolkit.git
-(3) cd NoobSecToolkit/NoobSecToolkit/
+(3) cd NoobSecToolkit/
 (4) python NSToolkit.py
 (5) Enjoy :)
 
