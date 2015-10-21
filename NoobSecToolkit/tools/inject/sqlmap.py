@@ -92,7 +92,7 @@ def main():
             sys.stderr = StdDbOut(conf.taskid, messagetype="stderr")
             setRestAPILog()
 
-        banner()
+        #banner()
 
         conf.showTime = True
         dataToStdout("[!] legal disclaimer: %s\n\n" % LEGAL_DISCLAIMER, forceOutput=True)

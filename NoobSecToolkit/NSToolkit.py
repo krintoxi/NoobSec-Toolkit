@@ -82,6 +82,12 @@ def loopfunc():
 		cmd1 = os.system ("cd scripts/")	
 		cmd1 = os.system ("./dloads/dnscrypt-autoinstall.sh")
 
+        if choice == "clear":
+                cmd1 = os.system ("clear")
+                print "--------------"
+                print "Fresh Terminal"
+                print "--------------"
+                
 
 	if choice == "exit" or choice == "quit" or choice == "q":
 		sys.exit()
