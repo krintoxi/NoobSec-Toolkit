@@ -1,6 +1,6 @@
---------------------
-NoobSecToolkit v1
---------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NoobSecToolkit version 1.8
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This is meant to be a "script kiddie" friendly Toolkit that brings tools like Nikto,SQLMAP, Theharvester together all in 1 with predefined security configurations and modifications.
 
 The layout for this simple Toolkit goes as follows:
@@ -12,7 +12,7 @@ Install Instructions
 ----------------------
 (1) CTRL + ALT + T (Open Terminal)
 (2) git clone https://github.com/krintoxi/NoobSecToolkit.git
-(3) cd NoobSecToolkit/
+(3) cd NoobSecToolkit/NoobSecToolkit/
 (4) python NSToolkit.py
 (5) Enjoy :)
 

@@ -4,7 +4,7 @@ import os
 import sys, traceback
 #Title AREA
 print"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-print"NOOB Security Toolkit 2.0 - BETA"
+print"NOOB Security Toolkit 1.8 - BETA"
 print"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 print"Dev: The_Chosen_One"
 print"~~~~~~~~~~~~~~~~~~~"
@@ -25,10 +25,11 @@ print "Misc Options:"
 print "**************"
 print "(itor) install Tor"
 print "(stor) Start Tor"
+print "(tors) Check Tor Status"
 print "(dvpn) Download VPN"
 print "(lvpn) Launch VPN (debian)"
 print "(encdns) Encrypt DNS"
-print "(quit)(exit)(q) Quit"
+print "(q) - (quit) - (clear)"
 print "--------------------------"
 def loopfunc():
 	#Script Input
@@ -54,6 +55,12 @@ def loopfunc():
 		print "Starting Tor...."
 		cmd1 = os.system ("sudo service tor start")
 		
+	if choice "tors":
+                print "----------------"
+                print "Tor Status Check"
+                print "----------------"
+                cmd1 = os.system ("sudo service tor status")
+                
 	if choice == "dvpn":
 		print "Downloading VPN Client to /Bitmask-Linux64-latest....." 
 		cmd1 = os.system ("wget 'https://dl.bitmask.net/client/linux/stable/Bitmask-linux64-latest.tar.bz2'")	
