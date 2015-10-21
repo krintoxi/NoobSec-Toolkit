@@ -55,7 +55,7 @@ def loopfunc():
 		print "Starting Tor...."
 		cmd1 = os.system ("sudo service tor start")
 		
-	if choice "tors":
+	if choice == "tors":
                 print "----------------"
                 print "Tor Status Check"
                 print "----------------"
