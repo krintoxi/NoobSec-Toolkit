@@ -12,12 +12,14 @@ Install Instructions
 ----------------------
 (1) CTRL + ALT + T (Open Terminal)
 (2) git clone https://github.com/krintoxi/NoobSecToolkit.git
-(3) cd /NoobSecToolkit/NoobSecToolkit/
-(4) python SecuritToolkit.py
+(3) cd /NoobSecToolkit/
+(4) python NSToolkit.py
 (5) Enjoy :)
 
 Credit where credit is due:
 -SQLMAP
 -Nikto
 -DNSCRYPT
+-Juliar Team
 @Zick from Cybrary.it
+
