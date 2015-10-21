@@ -10,28 +10,29 @@ print"Dev: The_Chosen_One"
 print"~~~~~~~~~~~~~~~~~~~"
 #End Of Title Area
 #Start Of Options 
+print "*****************"
+print "Toolkit Options:"
+print "*****************"
+print "----------------"
+print "(sqli)SQL Injector"
+print "(vulscan) Vulnerability Scanner"
+print "(dinfo) Gather Basic Domain Info"
+print "(discover) Information Harvester (Kali Linux Only!)"
+print "-----------------"
+#Extra Options 
+print "**************"
+print "Misc Options:"
+print "**************"
+print "(itor) install Tor"
+print "(stor) Start Tor"
+print "(dvpn) Download VPN"
+print "(lvpn) Launch VPN (debian)"
+print "(encdns) Encrypt DNS"
+print "(quit)(exit)(q) Quit"
+print "--------------------------"
 def loopfunc():
-	print "*****************"
-	print "Toolkit Options:"
-	print "*****************"
-	print "----------------"
-	print "(sqli)SQL Injector"
-	print "(vulscan) Vulnerability Scanner"
-	print "(dinfo) Gather Basic Domain Info"
-	print "(discover) Information Harvester (Kali Linux Only!)"
-	print "-----------------"
-	#Extra Options 
-	print "**************"
-	print "Misc Options:"
-	print "**************"
-	print "(itor) install Tor"
-	print "(stor) Start Tor"
-	print "(dvpn) Download VPN"
-	print "(lvpn) Launch VPN (debian)"
-	print "(encdns) Encrypt DNS"
-	print "(quit)(exit)(q) Quit"
-	print "--------------------------"
 	#Script Input
+	print ""
 	choice = raw_input("What do you want to do?:")
 
 	if choice == "sqli":
@@ -88,3 +89,5 @@ def loopfunc():
 		print "Choice "+choice+" is not valid."
 		loopfunc()
 loopfunc()
+
+
