@@ -26,8 +26,7 @@ print "**************"
 print "(itor) install Tor"
 print "(stor) Start Tor"
 print "(tors) Check Tor Status"
-print "(dvpn) Download VPN"
-print "(lvpn) Launch VPN (debian)"
+print "(vpn)Start VPN Launcher"
 print "(encdns) Encrypt DNS"
 print "(q) - (quit) - (clear)"
 print "--------------------------"
@@ -61,16 +60,17 @@ def loopfunc():
                 print "----------------"
                 cmd1 = os.system ("sudo service tor status")
                 
-	if choice == "dvpn":
-		print "Downloading VPN Client to /Bitmask-Linux64-latest....." 
-		cmd1 = os.system ("wget 'https://dl.bitmask.net/client/linux/stable/Bitmask-linux64-latest.tar.bz2'")	
-		cmd1 = os.system ("bzip2 -d Bitmask-linux64-latest.tar.bz2 ")
-		cmd1 = os.system ("tar -xvf Bitmask-linux64-latest.tar")
+	#if choice == "dvpn":
+		#print "Downloading VPN Client to /Bitmask-Linux64-latest....." 
+		#cmd1 = os.system ("wget 'https://dl.bitmask.net/client/linux/stable/Bitmask-linux64-latest.tar.bz2'")	
+		#cmd1 = os.system ("bzip2 -d Bitmask-linux64-latest.tar.bz2 ")
+		#cmd1 = os.system ("tar -xvf Bitmask-linux64-latest.tar")
 		
 		# Start VPN broken
-	if choice == "lvpn":
 		
-		cmd1 = os.system ("sudo python Bitmask-linux64-0.8.1/apps/launcher.py")
+	if choice == "vpn":
+		print "Starting VPN Launcher for Bitmask...."
+		cmd1 = os.system ("sudo python scripts/vpn.py")
 
 	if choice == "discover":
 		print "Launching Discover.... By: Lee Baird"
@@ -80,7 +80,7 @@ def loopfunc():
 			
 
 	if choice == "dinfo":
-		print "Launching Domain Script..."
+		print "Launching NSlookup Script..."
 		cmd1 = os.system ("python scripts/dns.py")
 		
 	if choice == "encdns":
