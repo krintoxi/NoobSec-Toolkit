@@ -27,7 +27,7 @@ if VPNversion == "32bit":
     print"**************"
     print"You have chosen the VPN version "+VPNversion
     print"**************"
-    Continue = raw_input("Continue? (yes) (no) :")
+    Continue = raw_input("Continue? (yes) (no):")
     if Continue == "no":
         sys.exit()
     cmd1 = os.system ("wget 'https://dl.bitmask.net/client/linux/stable/Bitmask-linux32-latest.tar.bz2'")	
