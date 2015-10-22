@@ -99,7 +99,7 @@ def loopfunc():
 	if choice == "exit" or choice == "quit" or choice == "q":
 		sys.exit()
 	else:
-		print "Choice "+choice+" is not valid."
+		print "We are done here!"
 		loopfunc()
 loopfunc()
 
