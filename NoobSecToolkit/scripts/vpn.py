@@ -19,7 +19,7 @@ if VPNversion == "64bit":
     Continue = raw_input("Continue? (yes) (no) :")
     if Continue == "no":
         sys.exit()
-    cmd1 = os.system ("wget 'https://dl.bitmask.net/client/linux/stable/Bitmask-linux64-latest.tar.bz2 /vpn/'")	
+    cmd1 = os.system ("wget --output-document=vpn/ 'https://dl.bitmask.net/client/linux/stable/Bitmask-linux64-latest.tar.bz2'")	
     cmd1 = os.system ("bzip2 -d Bitmask-linux64-latest.tar.bz2 ")
     cmd1 = os.system ("tar -xvf Bitmask-linux64-latest.tar")
 
@@ -30,10 +30,10 @@ if VPNversion == "32bit":
     Continue = raw_input("Continue? (yes) (no) :")
     if Continue == "no":
         sys.exit()
-    cmd1 = os.system ("wget --output-document=/vpn 'https://dl.bitmask.net/client/linux/stable/Bitmask-linux32-latest.tar.bz2'")	
-    cmd1 = os.system ("bzip2 -d Bitmask-linux32-latest.tar.bz2 ")
-    cmd1 = os.system ("tar -xvf Bitmask-linux32-latest.tar vpn/")
-
+    cmd1 = os.system ("wget --output-document=vpn/ 'https://dl.bitmask.net/client/linux/stable/Bitmask-linux32-latest.tar.bz2'")	
+    cmd1 = os.system ("bzip2 -d vpn/Bitmask-linux32-latest.tar.bz2 ")
+    cmd1 = os.system ("tar -xvf vpn/Bitmask-linux32-latest.tar")
+    
 if VPNversion == "kernel":
     print "--------------------"
     print "Kernel Information:"
