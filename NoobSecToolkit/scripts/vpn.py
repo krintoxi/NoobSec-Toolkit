@@ -30,7 +30,7 @@ if VPNversion == "32bit":
     Continue = raw_input("Continue? (yes) (no) :")
     if Continue == "no":
         sys.exit()
-    cmd1 = os.system ("wget- -output-document=/vpn 'https://dl.bitmask.net/client/linux/stable/Bitmask-linux32-latest.tar.bz2'")	
+    cmd1 = os.system ("wget --output-document=/vpn 'https://dl.bitmask.net/client/linux/stable/Bitmask-linux32-latest.tar.bz2'")	
     cmd1 = os.system ("bzip2 -d Bitmask-linux32-latest.tar.bz2 ")
     cmd1 = os.system ("tar -xvf Bitmask-linux32-latest.tar vpn/")
 
