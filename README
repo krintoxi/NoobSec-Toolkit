@@ -1,5 +1,5 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-NoobSecToolkit version 1.8
+NoobSecToolkit version 1.8 update 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This is meant to be a "script kiddie" friendly Toolkit that brings tools like Nikto,SQLMAP, Theharvester together all in 1 with predefined security configurations and modifications.
 
@@ -17,9 +17,9 @@ Install Instructions
 (5) Enjoy :)
 
 Credit where credit is due:
+-Bitmask
 -SQLMAP
 -Nikto
 -DNSCRYPT
--Juliar Team
 @Zick from Cybrary.it
 

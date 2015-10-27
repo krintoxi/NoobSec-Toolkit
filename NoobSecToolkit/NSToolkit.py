@@ -28,7 +28,7 @@ print "(stor) Start Tor"
 print "(tors) Check Tor Status"
 print "(vpn)Start VPN Launcher"
 print "(encdns) Encrypt DNS"
-print "(q) - (quit) - (clear)"
+print "(quit) - (home) - (clear)"
 print "--------------------------"
 def loopfunc():
 	#Script Input
@@ -94,12 +94,16 @@ def loopfunc():
                 print "--------------"
                 print "Fresh Terminal"
                 print "--------------"
+
+        if choice == "home":
+                cmd1 = os.system ("python NSToolkit.py")
                 
 
 	if choice == "exit" or choice == "quit" or choice == "q":
 		sys.exit()
 	else:
 		print "We are done here!"
+		
 		loopfunc()
 loopfunc()
 
