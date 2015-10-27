@@ -1,5 +1,13 @@
+  _   _             _       _____          _______          _ _    _ _          __   ___  
+ | \ | |           | |     / ____|        |__   __|        | | |  (_) |        /_ | / _ \ 
+ |  \| | ___   ___ | |__  | (___   ___  ___  | | ___   ___ | | | ___| |_  __   _| || (_) |
+ | . ` |/ _ \ / _ \| '_ \  \___ \ / _ \/ __| | |/ _ \ / _ \| | |/ / | __| \ \ / / | > _ < 
+ | |\  | (_) | (_) | |_) | ____) |  __/ (__  | | (_) | (_) | |   <| | |_   \ V /| || (_) |
+ |_| \_|\___/ \___/|_.__/ |_____/ \___|\___| |_|\___/ \___/|_|_|\_\_|\__|   \_/ |_(_)___/ 
+                      ______             ______                                           
+                     |______|           |______|                       
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-NoobSecToolkit version 1.8 update 1
+version 1.8 update 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This is meant to be a "script kiddie" friendly Toolkit that brings tools like Nikto,SQLMAP, Theharvester together all in 1 with predefined security configurations and modifications.
 
@@ -22,4 +30,4 @@ Credit where credit is due:
 -Nikto
 -DNSCRYPT
 @Zick from Cybrary.it
-
+  _   _             _       _____          _______          _ _    _ _          __   ___  
