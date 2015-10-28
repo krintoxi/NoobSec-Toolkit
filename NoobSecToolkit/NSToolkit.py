@@ -4,7 +4,7 @@ import os
 import sys, traceback
 #Title AREA
 print"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-print"NOOB Security Toolkit 1.8 - BETA"
+print"NOOB Security Toolkit 1.9 - BETA"
 print"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 print"Dev: The_Chosen_One"
 print"~~~~~~~~~~~~~~~~~~~"
@@ -20,13 +20,14 @@ print "(dinfo) Gather Basic Domain Info"
 print "(discover) Information Harvester (Kali Linux Only!)"
 print "-----------------"
 #Extra Options 
-print "**************"
-print "Misc Options:"
-print "**************"
+print "******************"
+print "Security Options:"
+print "******************"
+print "(macspoof) Spoof Mac Address"
 print "(itor) install Tor"
 print "(stor) Start Tor"
 print "(tors) Check Tor Status"
-print "(vpn)Start VPN Launcher"
+print "(vpn) Start VPN Launcher"
 print "(encdns) Encrypt DNS"
 print "(quit) - (home) - (clear)"
 print "--------------------------"
@@ -35,6 +36,10 @@ def loopfunc():
 	print ""
 	choice = raw_input("What do you want to do?:")
 
+	if choice == "macspoof":
+                print "Loading Mac Spoof...."
+                cmd1 = os.system ("python scripts/macspoof.py")
+                
 	if choice == "sqli":
 		print "Launching SQLI Injector...."
 		cmd1 = os.system ("sudo python scripts/sqli.py")
@@ -42,8 +47,6 @@ def loopfunc():
 	if choice == "vulscan":
 		print "Launching NiktoST.pl...."
 		cmd1 = os.system ("sudo python scripts/vulscan.py")
-		
-	#if choice == "":
 
 	#Start of Misc Options
 	if choice == "itor":
