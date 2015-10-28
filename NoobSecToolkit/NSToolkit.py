@@ -17,6 +17,7 @@ print "----------------"
 print "(sqli)SQL Injector"
 print "(vulscan) Vulnerability Scanner"
 print "(dinfo) Gather Basic Domain Info"
+print "(apf) Admin Page Finder"
 print "(discover) Information Harvester (Kali Linux Only!)"
 print "-----------------"
 #Extra Options 
@@ -35,6 +36,9 @@ def loopfunc():
 	#Script Input
 	print ""
 	choice = raw_input("What do you want to do?:")
+
+	if choice == "apf":
+                cmd1 = os.system ("perl scripts/finder.pl")
 
 	if choice == "macspoof":
                 print "Loading Mac Spoof...."
