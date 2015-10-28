@@ -35,6 +35,3 @@ Credit where credit is due:
 -Nikto
 -DNSCRYPT
 -Zick 
-
-
-                                                                                                                                                            
