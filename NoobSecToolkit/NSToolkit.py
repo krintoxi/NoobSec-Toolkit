@@ -4,7 +4,7 @@ import os
 import sys, traceback
 #Title AREA
 print"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-print"NOOB Security Toolkit 1.9 - BETA"
+print"NOOB Security Toolkit 2.0 - BETA"
 print"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 print"Dev: The_Chosen_One"
 print"~~~~~~~~~~~~~~~~~~~"
