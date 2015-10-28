@@ -1,7 +1,5 @@
---   __ _ ____ ____ ___      ____ ____ ____     ___ ____ ____ _    _  _ _ ___
---   | \| [__] [__] |==] ___ ==== |=== |___ ___  |  [__] [__] |___ |-:_ |  |                                        
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-version 1.8 update 1
+NoobSecToolkit version 2.0 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This is meant to be a "script kiddie" friendly Toolkit that brings tools like Nikto,SQLMAP, Theharvester together all in 1 with predefined security configurations and modifications.
 
@@ -18,10 +16,25 @@ Install Instructions
 (4) python NSToolkit.py
 (5) Enjoy :)
 
+
+![alt tag](http://i.imgur.com/8cn1VLB.png)
+
+-Vulnerability Scanner
+-Sql Injector
+-Domain Info
+-ONIST
+-DNS Encryption
+-Admin Page Finder
+-VPN Downloader
+-Tor Installer 
+-Mac Address Spoofing
+
 Credit where credit is due:
 -Bitmask
 -SQLMAP
 -Nikto
 -DNSCRYPT
-@Zick from Cybrary.it
-  _   _             _       _____          _______          _ _    _ _          __   ___  
+-Zick 
+
+
+                                                                                                                                                            
