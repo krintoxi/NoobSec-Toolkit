@@ -10,11 +10,11 @@ The layout for this simple Toolkit goes as follows:
 ---------------------
 <b>Install Instructions</b>
 ----------------------
-<br>(1) CTRL + ALT + T (Open Terminal)
-<br>(2) git clone https://github.com/krintoxi/NoobSecToolkit.git
-<br>(3) cd NoobSecToolkit/NoobSecToolkit/
-<br>(4) python NSToolkit.py
-<br>(5) Enjoy :)
+<br><b>(1)</b> CTRL + ALT + T (Open Terminal)
+<br><b>(2)</b> git clone https://github.com/krintoxi/NoobSecToolkit.git
+<br><b>(3)</b> cd NoobSecToolkit/NoobSecToolkit/
+<br><b>(4)</b> python NSToolkit.py
+<br><b>(5)</b> Enjoy :)
 </p>
 <img src="https://cloud.githubusercontent.com/assets/15209566/10800473/5530287e-7d88-11e5-9ace-d8c96972939b.png" width="50%"></img> 
 <br>-Vulnerability Scanner
@@ -26,9 +26,11 @@ The layout for this simple Toolkit goes as follows:
 <br>-VPN Downloader
 <br>-Tor Installer 
 <br>-Mac Address Spoofing
+<br>
 <b>Credit where credit is due:</b>
--Bitmask
--SQLMAP
--Nikto
--DNSCRYPT
--Zick 
+<br>-Bitmask
+<br>-SQLMAP
+<br>-Nikto
+<br>-DNSCRYPT
+<br>-Zick
+<br>-Cybrary 
