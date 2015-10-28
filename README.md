@@ -1,6 +1,6 @@
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <h2>NoobSecToolkit version 2.0</h2> 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This is meant to be a "script kiddie" friendly Toolkit that brings tools like Nikto,SQLMAP, Theharvester together all in 1 with predefined security configurations and modifications.
 
 The layout for this simple Toolkit goes as follows:
