@@ -20,7 +20,7 @@ The layout for this simple Toolkit goes as follows:
 <br>-Vulnerability Scanner
 <br>-Sql Injector
 <br>-Domain Info
-<br>-ONIST
+<br>-OSNIT
 <br>-DNS Encryption
 <br>-Admin Page Finder
 <br>-VPN Downloader
