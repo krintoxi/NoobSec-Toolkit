@@ -5,9 +5,9 @@ option = raw_input("Continue with Mac Spoofing? y/n: ")
 
 if option == "y" or "yes":
     print "Starting MAC Spoofer..."
-    cmd1 = os.system ("ifconfig eth0 down")
-    cmd1 = os.system ("ifconfig eth0 hw ether 00:00:00:00:00:02")
-    cmd1 = os.system ("ifconfig eth0 up")
+    cmd1 = os.system ("sudo ifconfig eth0 down")
+    cmd1 = os.system ("sudo ifconfig eth0 hw ether 00:00:00:00:00:02")
+    cmd1 = os.system ("sudo ifconfig eth0 up")
     print "Finished Spoofing Mac!..."
     cmd1 = os.system ("ifconfig eth0")
 
