@@ -1,5 +1,6 @@
 
 # <h2>NoobSecToolkit version 2.0 Beta</h2>
+https://krintoxi.github.io/NoobSecToolkit/
 ***
 -
 Is meant to be a "script kiddie" friendly Python Based Toolkit that brings together powerful security and anonimity tools with predefined security configurations and modifications. Making it very simple for NOOBS to get started!
