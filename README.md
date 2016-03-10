@@ -38,7 +38,6 @@ Is meant to be a "script kiddie" friendly Python Based Toolkit that brings toget
 
 ***
 
-![](https://raw.githubusercontent.com/krintoxi/NoobSecToolkit/52d6ee6b50f14e4791eee463c46b39a66b9d85bc/X9kaBLA.png)
 **Other Links**
 * https://www.cybrary.it/forums/topic/noobsectoolkit-v2-official-release/
 * https://www.cybrary.it/forums/topic/building-security-toolkit-in-python/
