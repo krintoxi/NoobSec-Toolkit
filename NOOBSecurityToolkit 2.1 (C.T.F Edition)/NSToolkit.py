@@ -29,6 +29,7 @@ print "(stegattack) Steghide Dictionary Attacker"
 print "(steghide) Install, Learn and Use Steghide"
 print "(uihanalysis) Intrusion Analysis (URL,IP,HASH)"
 print "(backdoorssh) Options For Deploying an SSH Backdoor"
+print "(osint) aids in the process of information gathering"
 print "-----------------"
 #Extra Options 
 print "******************"
@@ -146,6 +147,17 @@ def loopfunc():
 		print "Launching ASCII Converter Website"
 		print "----------------------------------"
 		cmd1 = os.system ("iceweasel https://www.branah.com/ascii-converter")
+
+	if choice == "osint":
+		print "----------------------------------"
+		print "Launching OSCARF OSINT Script....."
+		print "----------------------------------"
+		cmd1 = os.system("python scripts/OSCAR/DEPENDENCY_CHECK.py")
+		cmd1 = os.system("pip install -r scripts/OSCAR/requirements.txt")
+		cmd1 = os.sysem ("apt-get install python-dev")
+                print "Done Checking For Updates!"
+                cmd1 = os.system ("python scripts/OSCAR/OSCARf.py")
+
 	
 	if choice == "steghide":
 		print "----------------------------------"
