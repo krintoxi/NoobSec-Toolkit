@@ -114,12 +114,14 @@ def main():
         asciis.asciiart()
     try:
         print """
-        OSCAR (Open Source Collection And Recon) Framework
+        NoobSecToolkit(C.T.F Edition)(Open Source Collection And Recon) Framework
+        (OSCARF by: NinjaSl0th )
+        ----------------------------------
         (CTRL+C returns back to main menu)
         -------------
         1. Social Networking
         -------------
-        2. Shodan
+        2. Shodan (Not Working)
         -------------
         3. News
         -------------
@@ -130,7 +132,7 @@ def main():
         6. Web Tools
         -------------
 
-        0. Exit OSCAR
+        0. Exit 
         """
         opt = raw_input("Enter an option: ")
         if opt == "1":
@@ -148,10 +150,10 @@ def main():
             webtools()
             #wscrape()
         elif opt == "0":
-            print "Thanks for using OSCAR!"
+            print "Thanks for using NoobSecToolkit (C.T.F Edition)!"
             sys.exit(0)
         else:
-            print "You entered an invalid option!"
+            print "Sorry you entered an invalid option!"
             main()
     except (KeyboardInterrupt):
         main()
@@ -164,7 +166,7 @@ def socialMenu():
     """Select Social Media Source"""
 
     print """
-    1. Twitter
+    1. Twitter (Not Working)
     2. FaceBook
     3. LinkedIn
     4. Check username on instagram
