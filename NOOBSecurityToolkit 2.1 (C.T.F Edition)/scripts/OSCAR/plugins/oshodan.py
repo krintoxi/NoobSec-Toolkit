@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import thread
-import shodan
 try:
     shodan_key_file = open('auth/shodankey.txt', 'r')
     shodan_key_line = shodan_key_file.readlines()
