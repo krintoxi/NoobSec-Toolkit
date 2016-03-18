@@ -8,7 +8,6 @@ try:
     from socket import socket
     import OpenSSL
     import ssl
-    from timeout import timeout
     import thread
 except Exception, e:
     print e
