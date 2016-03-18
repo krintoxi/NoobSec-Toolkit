@@ -154,7 +154,7 @@ def loopfunc():
 		print "----------------------------------"
 		cmd1 = os.system("python scripts/OSCAR/DEPENDENCY_CHECK.py")
 		cmd1 = os.system("pip install -r scripts/OSCAR/requirements.txt")
-		cmd1 = os.sysem ("apt-get install python-dev")
+		cmd1 = os.system ("apt-get install python-dev")
                 print "Done Checking For Updates!"
                 cmd1 = os.system ("python scripts/OSCAR/OSCARf.py")
 
