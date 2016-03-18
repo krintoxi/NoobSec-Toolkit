@@ -95,7 +95,7 @@ def loopfunc():
 		print "-------------------------------------"
 		print "deploy a specific backdoor, such as a netcat backdoor or msfvenom backdoor"
 		cmd1 = os.system ("sudo python scripts/sshbackdoors/dependencies.py")
-		cmd1 = os.system ("sudo python scripts/sshbackdoors/main.py")
+		cmd1 = os.system ("sudo python scripts/sshbackdoors/master.py")
 
 
 	if choice == "discover":
