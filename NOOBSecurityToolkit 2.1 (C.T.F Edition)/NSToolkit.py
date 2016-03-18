@@ -28,6 +28,7 @@ print "(dping) DOS/Ping Target For 1,000 Seconds"
 print "(stegattack) Steghide Dictionary Attacker"
 print "(steghide) Install, Learn and Use Steghide"
 print "(uihanalysis) Intrusion Analysis (URL,IP,HASH)"
+print "(backdoorssh) Options For Deploying an SSH Backdoor"
 print "-----------------"
 #Extra Options 
 print "******************"
@@ -87,6 +88,15 @@ def loopfunc():
 	if choice == "vpn":
 		print "Starting VPN Launcher for Bitmask...."
 		cmd1 = os.system ("sudo python scripts/vpn.py")
+
+	if choice == "backdoorssh":
+                print "-------------------------------------"
+		print "Launching Deploy Script.. "
+		print "-------------------------------------"
+		print "deploy a specific backdoor, such as a netcat backdoor or msfvenom backdoor"
+		cmd1 = os.system ("sudo python scripts/sshbackdoors/dependencies.py")
+		cmd1 = os.system ("sudo python scripts/sshbackdoors/main.py")
+
 
 	if choice == "discover":
 		print "Launching Discover.... By: Lee Baird"
