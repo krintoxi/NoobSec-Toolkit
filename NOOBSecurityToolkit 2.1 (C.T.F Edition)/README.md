@@ -3,7 +3,7 @@
 https://krintoxi.github.io/NoobSecToolkit/
 ***
 -
-Is meant to be a "script kiddie" friendly Python Based Toolkit that brings together powerful security and anonimity tools with predefined security configurations and modifications. Making it very simple for NOOBS to get started!
+NoobSecToolkit Is meant to be a "script kiddie" friendly Python Based Toolkit that brings together powerful security and anonimity tools with predefined security configurations and modifications. Making it very simple for NOOBS to get started!
 <b>Install Instructions</b>
 -
 <br><b>(1)</b> CTRL + ALT + T (Open Terminal)
@@ -26,6 +26,8 @@ Is meant to be a "script kiddie" friendly Python Based Toolkit that brings toget
 * -(stegattack) Steghide Dictionary Attacker
 * -(steghide) Install, Learn and Use Steghide
 * -(uihanalysis) Intrusion Analysis (URL,IP,HASH)
+* -(backdoorssh) Options For Deploying an SSH Backdoor
+
 
 **Misc Options:**
 * (itor) install Tor (Will install Tor Services)
@@ -33,6 +35,7 @@ Is meant to be a "script kiddie" friendly Python Based Toolkit that brings toget
 * (tors) Check Tor Status (Will Check the status of Tor)
 * (vpn) Start VPN Launcher (Will run a VPN Launcher)
 * (encdns) Encrypts DNS (Why DNS Cryptography Matters – OP3N)
+* (update) Updates and Upgrades the system
 
 **Toolkit Features**
 * Vulnerability Scanner
