@@ -121,15 +121,13 @@ def main():
         -------------
         1. Social Networking
         -------------
-        2. Shodan (Not Working)
+        2. Shodan (Needs API Key to be set)
         -------------
-        3. News
+        3. Network Info
         -------------
-        4. Network Info
+        4. Pastebin Scraper
         -------------
-        5. Pastebin Scraper
-        -------------
-        6. Web Tools
+        5. Web Tools
         -------------
 
         0. Exit 
@@ -140,13 +138,13 @@ def main():
         elif opt == "2":
             oscrShodan()
             main()
-        elif opt == "3":
-            news()
-        elif opt == "4":
-            networkMod()
         elif opt == "5":
+            news()
+        elif opt == "3":
+            networkMod()
+        elif opt == "4":
             pasteScrape()
-        elif opt == "6":
+        elif opt == "5":
             webtools()
             #wscrape()
         elif opt == "0":
@@ -166,10 +164,7 @@ def socialMenu():
     """Select Social Media Source"""
 
     print """
-    1. Twitter (Not Working)
-    2. FaceBook
-    3. LinkedIn
-    4. Check username on instagram
+    1. Check username on instagram
     0. Return
     """
     opt = raw_input("Enter an option: ")
