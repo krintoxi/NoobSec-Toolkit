@@ -125,9 +125,7 @@ def main():
         -------------
         3. Network Info
         -------------
-        4. Pastebin Scraper
-        -------------
-        5. Web Tools
+        4. Pastebin Scraper (Not Working)
         -------------
 
         0. Exit 
@@ -138,7 +136,7 @@ def main():
         elif opt == "2":
             oscrShodan()
             main()
-        elif opt == "5":
+        elif opt == "6":
             news()
         elif opt == "3":
             networkMod()
