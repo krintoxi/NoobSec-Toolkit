@@ -1,4 +1,0 @@
-colorama
-paramiko
-scp
-rpyc
