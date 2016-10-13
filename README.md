@@ -1,5 +1,5 @@
 
-# <h2>NoobSecToolkit version 2.0 Beta</h2>
+# <h2>NoobSecToolkit version 3.0 </h2>
 https://krintoxi.github.io/NoobSecToolkit/
 ***
 -
@@ -13,18 +13,35 @@ Is meant to be a "script kiddie" friendly Python Based Toolkit that brings toget
 </p>
 <img src="https://cloud.githubusercontent.com/assets/15209566/10800473/5530287e-7d88-11e5-9ace-d8c96972939b.png" width="50%"></img> 
 ***
-**Toolkit Options**
-* -(sqli)SQL Injector (Tests web urls for SQLI)
-* -(vulscan) Vulnerability Scanner (Scans for Vulnerabilities in a Network)
-* -(dinfo) Gather Basic Domain Info (Will do an extensive NSLookup on a Target)
-* -(discover) Information Harvester (Kali Linux Only!)
+*****************
+Toolkit Options:
+*****************
+(sqli)SQL Injector
+(vulscan) Vulnerability Scanner
+(dinfo) Gather Basic Domain Info
+(apf) Admin Page Finder
+(discover) Information Harvester
+(hashtype) Identify Hash Type
+(hexconv) Hex encoder and decoder!
+(converters) Web Converters
+(dping) DOS/Ping Target For 1,000 Seconds
+(stegattack) Steghide Dictionary Attacker
+(steghide) Install, Learn and Use Steghide
+(uihanalysis) Intrusion Analysis (URL,IP,HASH)
+*Options For Deploying an SSH Backdoor (COMING SOON)
+(osint) aids in the process of information gathering
+(toolbox) Extra Set of Tools
 
-**Misc Options:**
-* (itor) install Tor (Will install Tor Services)
-* (stor) Start Tor (Will start Background Tor Services)
-* (tors) Check Tor Status (Will Check the status of Tor)
-* (vpn) Start VPN Launcher (Will run a VPN Launcher)
-* (encdns) Encrypts DNS (Why DNS Cryptography Matters – OP3N)
+******************
+Security Options:
+******************
+(macspoof) Spoof Mac Address
+(itor) install Tor
+(stor) Start Tor
+(tors) Check Tor Status
+(vpn)  VPN Launcher (COMING SOON)
+(encdns) Encrypt DNS
+(quit) - (home) - (clear)-(update)
 
 **Toolkit Features**
 * Vulnerability Scanner
