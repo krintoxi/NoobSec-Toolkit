@@ -32,12 +32,12 @@ print """
                                                                                      
      78 111 111 98 95 83 101 99 95 84 111 111 108 75 105 116                   
      
-     A Penetration Testing Framework
-     -------------------------------
-     BY: The_Chosen_One (Krintoxi)
-     -------------------------------
-     Url: https://krintoxi.github.io/NoobSecToolkit                   
-     -----------------------------------------------
+     A Penetration Testing Framework For The inexperienced
+     ------------------------------------------------------
+     BY: Krintoxi https://www.cybrary.it/members/leoedge
+     ------------------------------------------------------
+     Url: https://github.com/krintoxi/NoobSec-Toolkit                   
+     ------------------------------------------------------
 """
 #End Of Title Area
 #Start Of Options 
