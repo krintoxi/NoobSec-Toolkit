@@ -1,9 +1,9 @@
 
-# <h2>NoobSecToolkit version 3.0 </h2>
+# <h2>NoobSecToolkit</h2><b>v3</b>
 https://krintoxi.github.io/NoobSecToolkit/
 ***
 -
-NoobSecToolkit is a Python Based Tool kit that brings together powerful security and anonymity tools and scripts with predefined security configurations and modifications. Making it very simple for students to get started with security! <b>— Leo Edge</b>
+NoobSecToolkit is a Python Based Tool kit that brings together powerful security and anonymity tools and scripts with predefined security configurations and modifications. Making it very simple for students to get started with security! <br><b>— Leo Edge</b>
 <b>Install Instructions</b>
 -
 <br><b>(1)</b> CTRL + ALT + T (Open Terminal)
@@ -11,8 +11,8 @@ NoobSecToolkit is a Python Based Tool kit that brings together powerful security
 <br><b>(3)</b> cd NoobSecToolkit/NoobSec-Toolkit/
 <br><b>(4)</b> python NSToolkit.py
 </p>
-<img src="https://cloud.githubusercontent.com/assets/15209566/10800473/5530287e-7d88-11e5-9ace-d8c96972939b.png" width="50%"></img> 
-***
+<img src="http://i.imgur.com/Dl23oJh.png" width="50%"></img> 
+
 *****************<br>
 Toolkit Options:<br>
 *****************<br>
@@ -53,6 +53,22 @@ Toolkit Options:<br>
 <br>* Tor Installer 
 <br>* Mac Address Spoofing
 <br>
+We can  utilize the Toolkit to Encrypt our DNS Queries ,Spoof our Mac Address, Install Tor and much more!
+<br>
+The latest feature added to NoobSecToolkit is `toolbox`  with the addition of "Toolbox" come options such as: 
+<img src="http://i.imgur.com/MZy1RMl.png" width="50%"></img>
+<br>* Drupal Hacking
+<br>* Wordpress & Joomla Scanner
+<br>* Gravity Form Scanner
+<br>* File Upload Checker
+<br>* Wordpress Exploit Scanner
+<br>* Wordpress Plugins Scanner
+<br>* Shell and Directory Finder
+<br>* Joomla! 1.5 - 3.4.5 remote code execution
+<br>* Vbulletin 5.X remote code execution
+<br>* BruteX - Automatically brute force all services running on a target
+<br>* Arachni - Web Application Security Scanner Framework
+
 
 **Other Links**
 * https://www.cybrary.it/forums/topic/noobsectoolkit-v2-official-release/
@@ -69,9 +85,11 @@ Toolkit Options:<br>
 * DNSCRYPT
 * Zick
 * Cybrary
-* Intercuba.Net 
-**A Spanish Translated version is managed and maintained by:**
-[InterCuba Network](https://www.intercuba.net/index.php)
+* Intercuba.Net
+* Fedy Wesleti & Mohamed Nour
+<br>
+**A Spanish Translated version is managed and maintained by:**<br>
+[InterCuba Network](https://www.intercuba.net/index.php) (TEMP DOWN)
 
 ***
 
