@@ -1,6 +1,5 @@
 
 # <h2>NoobSecToolkit</h2><b>v3</b>
-https://krintoxi.github.io/NoobSecToolkit/
 ***
 -
 NoobSecToolkit is a Python Based Tool kit that brings together powerful security and anonymity tools and scripts with predefined security configurations and modifications. Making it very simple for students to get started with security! <br><b>— Leo Edge</b>
