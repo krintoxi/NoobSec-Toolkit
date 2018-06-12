@@ -54,7 +54,7 @@ Security Options:
 def loopfunc():
 
 	#Script Input
-	choice = raw_input("NoobSecToolkit Command :")
+	choice = raw_input("NoobSec_Toolkit Command :")
 	
 	if choice == "apf":
 		print """
