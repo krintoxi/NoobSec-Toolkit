@@ -2,28 +2,6 @@
 # -*- coding: utf-8 -*-
 import os
 import sys, traceback
-import argparse
-import time
-import httplib
-import subprocess
-import re, urllib2
-import socket
-import urllib,sys,json
-import telnetlib
-import glob
-import random
-import Queue 
-import threading
-import requests
-import base64
-from getpass import getpass
-from commands import *
-from sys import argv
-from platform import system
-from urlparse import urlparse
-from xml.dom import minidom
-from optparse import OptionParser
-from time import sleep
 
 print """
       __   __   __       __   ___  __      ___  __   __              ___ 
