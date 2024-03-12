@@ -1,10 +1,7 @@
-<h1><b>C.I.T (Counter Intelligence Toolkit) </b>The Closed Successor to <b>NSToolkit</b> built with <b>Python3</b> can be found <a href="http://citoolkit.pw">Here</a></h1>
+<h1><b>S.S.A (Silent Strike Arsenal) </b>The Successor to <b>NSToolkit</b> built with <b>Python3</b> can be found <a href="https://www.intercuba.net/silent-strike-arsenal-1">Here</a></h1>
 # <h2>NoobSecToolkit</h2><b>v3</b>
-***
--
-NoobSecToolkit is a Python Based Tool kit that brings together powerful security and anonymity tools and scripts with predefined security configurations and modifications. Making it very simple for students to get started with security! <br><b>— Leo Edge</b>
+NoobSecToolkit is a Python Based Tool kit that brings together powerful security and anonymity tools and scripts with predefined security configurations and modifications. Making it very simple for students to get started with security! 
 <b>Install Instructions</b>
--
 <br><b>(1)</b> CTRL + ALT + T (Open Terminal)
 <br><b>(2)</b> git clone https://github.com/krintoxi/NoobSec-Toolkit.git
 <br><b>(3)</b> cd NoobSecToolkit/NoobSec-Toolkit/
@@ -30,29 +27,29 @@ Toolkit Options:<br>
 *Options For Deploying an SSH Backdoor (COMING SOON)<br>
 (osint) aids in the process of information gathering<br>
 (toolbox) Extra Set of Tools<br>
-<br>
-<br>******************
-<br>Security Options:
-<br>******************
-<br>(macspoof) Spoof Mac Address
-<br>(itor) install Tor
-<br>(stor) Start Tor
-<br>(tors) Check Tor Status
-<br>(vpn)  VPN Launcher (COMING SOON)
-<br>(encdns) Encrypt DNS
-<br>(quit) - (home) - (clear)-(update)
-<br>
-<br>**Toolkit Features**
-<br>* Vulnerability Scanner
-<br>* Sql Injector
-<br>* Domain Info
-<br>* DNS Encryption
-<br>* Admin Page Finder
-<br>* VPN Downloader
-<br>* Tor Installer 
-<br>* Mac Address Spoofing
-<br>
-We can  utilize the Toolkit to Encrypt our DNS Queries ,Spoof our Mac Address, Install Tor and much more!
+
+******************
+Security Options:
+******************
+(macspoof) Spoof Mac Address
+(itor) install Tor
+(stor) Start Tor
+(tors) Check Tor Status
+(vpn)  VPN Launcher (COMING SOON)
+(encdns) Encrypt DNS
+(quit) - (home) - (clear)-(update)
+
+*Toolkit Features**
+* Vulnerability Scanner
+* Sql Injector
+* Domain Info
+* DNS Encryption
+* Admin Page Finder
+* VPN Downloader
+* Tor Installer 
+* Mac Address Spoofing
+
+<b>We can  utilize the Toolkit to Encrypt our DNS Queries ,Spoof our Mac Address, Install Tor and much more!</b>
 <br>
 The latest feature added to NoobSecToolkit is `toolbox`  with the addition of "Toolbox" come options such as: 
 <img src="http://i.imgur.com/MZy1RMl.png" width="50%"></img>
@@ -88,7 +85,7 @@ The latest feature added to NoobSecToolkit is `toolbox`  with the addition of "T
 * Fedy Wesleti & Mohamed Nour
 <br>
 **A Spanish Translated version is managed and maintained by:**<br>
-[InterCuba Network](https://www.intercuba.net/index.php) (TEMP DOWN)
+[InterCuba Network](https://www.intercuba.net/) 
 
 ***
 
@@ -99,3 +96,4 @@ The latest feature added to NoobSecToolkit is `toolbox`  with the addition of "T
 **Find Me At:**
 * https://www.cybrary.it/members/leoedge/
 * https://twitter.com/dehibuja
+* 
