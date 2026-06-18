@@ -1,65 +1,34 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import os
 from time import sleep
 
-print "\nOSCAR-F requires various lib/modules to properly work."
-print "This script serves to check if you have those libs and",
-print 'will create the "auth" dir.\n'
+print("\nOSCAR-F requires various lib/modules to properly work.")
+print('This script serves to check if you have those libs and will create the "auth" dir.\n')
 
-sleep(2)
+sleep(1)
 
-try:
-    import readline
-    print '[+]FOUND: readline'
-except:
-    print '[+]MISSING: readline'
+for lib, name in [
+    ("readline", "readline"),
+    ("tweepy", "tweepy"),
+    ("twitter", "Twitter"),
+    ("feedparser", "feedparser"),
+    ("shodan", "shodan"),
+    ("bs4", "bs4 (beautifulsoup 4)"),
+    ("PIL", "PIL/Pillow"),
+    ("mechanize", "mechanize"),
+]:
+    try:
+        __import__(lib)
+        print("[+] FOUND: " + name)
+    except ImportError:
+        print("[+] MISSING: " + name + "  -->  pip3 install " + lib)
 
-try:
-    import tweepy
-    print '[+]FOUND: tweepy'
-except:
-    print '[+]MISSING: tweepy'
+auth_dir = os.path.join(os.path.dirname(__file__), "..", "auth")
+auth_dir = os.path.normpath(auth_dir)
+if not os.path.exists(auth_dir):
+    print("Adding the 'auth' directory. Be sure to run the setup script after this one!")
+    os.makedirs(auth_dir, exist_ok=True)
 
-try:
-    import twitter
-    print '[+]FOUND: Twitter'
-except:
-    print '[+]MISSING: Twitter'
-
-try:
-    import feedparser
-    print '[+]FOUND: feedparser'
-except:
-    print '[+]MISSING: feedparser'
-
-try:
-    import shodan
-    print '[+]FOUND: shodan'
-except:
-    print '[+]MISSING: shodan'
-
-try:
-    import bs4
-    print '[+]FOUND: bs4 (beautifulsoup 4)'
-except:
-    print '[+]MISSING: bs4 (beautifulsoup 4)'
-
-try:
-    from PIL import Image
-    print '[+]FOUND: PIL/Pillow'
-except:
-    print '[+]MISSING: PIL/Pillow module'
-
-try:
-    import mechanize
-    print "[+]FOUND: mechanize"
-except:
-    print "[+]MISSING: mechanize"
-
-if not os.path.exists('../auth'):
-    print "Adding the 'auth' directory. Be sure to run the setup",
-    print "script after this one!!!"
-    os.mkdir('../auth')
-print "To install dependencies: pip install -r requirements.txt"
+print("\nTo install all dependencies: pip3 install -r requirements.txt")

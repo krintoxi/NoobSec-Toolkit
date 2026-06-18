@@ -22,5 +22,5 @@ class Module(object):
             return None
 
     def help(self, args):
-        for name, opt in self.options.iteritems():
+        for name, opt in self.options.items():
             print("%s\t\t%s\t\t%s\t\t%s" % (opt.name, opt.value, opt.description, opt.required))

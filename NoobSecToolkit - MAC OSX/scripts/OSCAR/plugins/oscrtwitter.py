@@ -1,79 +1,64 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-# import sqlite3 for DB operations
-
 import itertools
+import threading
+import sys
+import os
+import re
+from time import sleep
+
 try:
     import sqlite3 as db
-except:
-    print "[+]ERROR: could not import sqlite3. You won't be able to add users to a sqliteDB!"
-    pass
+except ImportError:
+    print("[+] ERROR: could not import sqlite3.")
+    db = None
 
 try:
     import tweepy
     from tweepy import *
     from tweepy.streaming import *
-except:
-    print '[+]ERROR: Unable to import the tweepy library installed!!'
-    print 'You will not be able to use the twitter collection side of oscar!'
+except ImportError:
+    print("[+] ERROR: Unable to import tweepy! Install with: pip3 install tweepy")
+    tweepy = None
 
-import sys
-import thread
-import os
 
 def hist_tweet(t_api):
-    con = ''
+    con = ""
     try:
-        while con != 'n' or con != 'N' or con != 'No' or con != 'no':
+        while con.lower() not in ("n", "no"):
             try:
-                num_tweets = input('How many tweets (200 maximum): ')
-            except NameError:
-                print "[+]ERROR: must be a number value!"
+                num_tweets = int(input("How many tweets (200 maximum): ").strip())
+            except ValueError:
+                print("[+] ERROR: must be a number value!")
                 return
-            targetUsr = raw_input('Enter target user: ')
-            user = t_api.get_user(targetUsr)
-            print '\n'
-            print 'Username: ', user.screen_name
-            print 'Follower count: ', user.followers_count
-            print '\n'
-            target_tweets = t_api.user_timeline(targetUsr,count=num_tweets)
+            targetUsr = input("Enter target user: ").strip()
+            user = t_api.get_user(screen_name=targetUsr)
+            print()
+            print("Username: ", user.screen_name)
+            print("Follower count: ", user.followers_count)
+            print()
+            target_tweets = t_api.user_timeline(screen_name=targetUsr, count=num_tweets)
             counter = 0
             for tweet in target_tweets:
                 counter += 1
-                print counter, '-', tweet.text
-            con = raw_input('Run again?(y/n): ')
-            if con == 'no' or con == 'n' or con == 'N' or con == 'No':
-                return
+                print(counter, "-", tweet.text)
+            con = input("Run again? (y/n): ").strip()
     except KeyboardInterrupt:
         return
 
 
-# streaming class for the tweepy lib
-
 def lv_stream(t_auth):
-
-  # ask for the specified filter. Supports standard string. Hashtags too :P
-
-    filt = raw_input('Enter filter option: ')
+    filt = input("Enter filter option: ").strip()
 
     class listen(StreamListener):
-
         def on_status(self, status):
             try:
-
-        # print the status....use utf, or else.
-
-                print status.author.screen_name.encode('utf-8') + ': ' \
-                    + status.text.encode('utf-8')
-                print '\n'
-                saveFile = open('STREAM_%s.csv' % filt, 'a')
-                saveFile.write(str(time.ctime()) + ',,'+ status.author.screen_name.encode('utf-8') +',,' + status.text.encode('utf-8'))
-                saveFile.write('\n')
-                saveFile.close()
+                print(status.author.screen_name + ": " + status.text)
+                print()
+                with open("STREAM_%s.csv" % filt, "a", encoding="utf-8") as saveFile:
+                    saveFile.write(status.author.screen_name + ",," + status.text + "\n")
                 return True
             except (BaseException, KeyboardInterrupt, SystemExit):
-                #print 'failed on data, ', str(e)
                 sleep(3)
                 return
 
@@ -85,24 +70,15 @@ def lv_stream(t_auth):
 
 
 def lv_streamno(t_auth):
-
-  # ask for the specified filter. Supports standard string. Hashtags too :P
-
-    filt = raw_input('Enter filter option: ')
+    filt = input("Enter filter option: ").strip()
 
     class listen(StreamListener):
-
         def on_status(self, status):
             try:
-
-        # print the status....use utf, or else.
-
-                print status.author.screen_name.encode('utf-8') + ': ' \
-                    + status.text.encode('utf-8')
-                print '\n'
+                print(status.author.screen_name + ": " + status.text)
+                print()
                 return True
             except (BaseException, KeyboardInterrupt, SystemExit):
-                #print 'failed on data, ', str(e)
                 sleep(3)
                 return
 
@@ -113,235 +89,197 @@ def lv_streamno(t_auth):
     twitterStream.filter(track=[filt])
 
 
-# This can get confusing. Friends are people that are mutual followers.
-# That is, those users who target follows and is followed by
-
 def rcntFllw(t_api):
-    targetUsr = raw_input('Enter target user: ')
-    user = t_api.get_user(targetUsr)
+    targetUsr = input("Enter target user: ").strip()
+    user = t_api.get_user(screen_name=targetUsr)
     for friend in user.friends():
-        print friend.screen_name
-    print '\n'
-    return
+        print(friend.screen_name)
+    print()
 
 
 def rcntFllwrs(t_api):
-    targetUsr = raw_input('Enter target user: ')
-    user = t_api.get_user(targetUsr)
+    targetUsr = input("Enter target user: ").strip()
+    user = t_api.get_user(screen_name=targetUsr)
     for friends in user.followers(count=100):
-        print friends.screen_name
-    print '\n'
-    return
+        print(friends.screen_name)
+    print()
 
 
 def mentionCount(t_api):
     names = []
-    print """
+    print("""
     1. Retrieve details
     2. Count specific mentions
-  """
-    opt = raw_input('Enter an option: ')
-    if opt == '1':
-        targetUsr = raw_input('Please enter a username: ')
-        user = t_api.get_user(targetUsr)
-        # 200 is the api limit per query currently?
-        target_tweets = t_api.user_timeline(targetUsr, count=200)
-        saveFile = open('tweets.txt', 'a')
-        for tweet in target_tweets:
-
-      # print tweet.text
-
-            saveFile.write(tweet.text.encode('utf-8'))
-            saveFile.write('\n')
-        saveFile.close()
-        mentionCount(api)
-    if opt == '2':
+    """)
+    opt = input("Enter an option: ").strip()
+    if opt == "1":
+        targetUsr = input("Please enter a username: ").strip()
+        user = t_api.get_user(screen_name=targetUsr)
+        target_tweets = t_api.user_timeline(screen_name=targetUsr, count=200)
+        with open("tweets.txt", "a", encoding="utf-8") as saveFile:
+            for tweet in target_tweets:
+                saveFile.write(tweet.text + "\n")
+        mentionCount(t_api)
+    elif opt == "2":
         try:
-            tweetedUsrs = open('tweets.txt').read().splitlines()
-        except:
-            print 'There was an error opening the tweets file.',
-            print 'Did you run the first option?'
+            tweetedUsrs = open("tweets.txt").read().splitlines()
+        except FileNotFoundError:
+            print("There was an error opening the tweets file. Did you run the first option?")
             return
-
         for lines in tweetedUsrs:
-            tos = re.findall('@([A-Za-z0-9_]{1,15})', lines)
+            tos = re.findall(r"@([A-Za-z0-9_]{1,15})", lines)
             for twitUsr in tos:
                 names.append(twitUsr)
         while True:
             try:
-                targetUsr2 = \
-                    raw_input('Enter a twitter handle (without the @)'
-                              'Ctrl+C to return: ')
-                print 'Number of times mentioned: ', \
-                    names.count(targetUsr2)
+                targetUsr2 = input("Enter a twitter handle (without the @) Ctrl+C to return: ").strip()
+                print("Number of times mentioned: ", names.count(targetUsr2))
             except KeyboardInterrupt:
-                print '\n'
+                print()
                 return
 
 
-  # twitMenu()
-
 def twitSearch(t_api):
-    t_query = raw_input('Enter search: ')
-    t_res = tweepy.Cursor(t_api.search, q=t_query, count=10,
-                          result='recent',
-                          include_entities=True).items()
+    t_query = input("Enter search: ").strip()
+    t_res = tweepy.Cursor(t_api.search_tweets, q=t_query, count=10,
+                          result_type="recent").items()
     while True:
         try:
-            tweet = t_res.next()
-            print tweet.user.screen_name.encode('utf-8'), ':', \
-                tweet.created_at, ':', tweet.text.encode('utf-8')
-            print   # print an extra line...just for readability
-            sleep(5)  # sleep so it is human readable
-        except tweepy.TweepError:
-
-      # if tweepy encounters an error, sleep for fifteen minutes..this will
-      # help against API bans.
-
+            tweet = next(t_res)
+            print(tweet.user.screen_name, ":", tweet.created_at, ":", tweet.text)
+            print()
+            sleep(5)
+        except tweepy.TweepyException:
             sleep(60 * 15)
+        except StopIteration:
+            return
         except KeyboardInterrupt:
             return
+
 
 def twitdelete(t_api, stat):
     try:
         t_api.destroy_status(stat)
-        print "Deleted:", stat
-    except:
-        print "Failed to delete:", stat
+        print("Deleted:", stat)
+    except Exception:
+        print("Failed to delete:", stat)
 
-"""Copied from https://gist.github.com/davej/113241 <- credit where credit is due"""
+
 def batch_delete(t_api):
-    print "You are about to Delete all tweets from the account @%s." % t_api.verify_credentials().screen_name
-    print "Does this sound ok? There is no undo! Type yes to carry out this action."
-    do_delete = raw_input("> ")
-    if do_delete.lower() == 'yes':
+    print("You are about to delete all tweets from @%s." % t_api.verify_credentials().screen_name)
+    print("Type 'yes' to carry out this action. There is no undo!")
+    do_delete = input("> ").strip()
+    if do_delete.lower() == "yes":
         for status in tweepy.Cursor(t_api.user_timeline).items():
             try:
-                #t_api.destroy_status(status.id)
-                thread.start_new_thread(twitdelete, (t_api, status.id,))
-                #print "Deleted:", status.id
-            except:
-                print "Failed to delete:", status.id
-            sleep(.5)
-    return
+                t = threading.Thread(target=twitdelete, args=(t_api, status.id), daemon=True)
+                t.start()
+            except Exception:
+                print("Failed to delete:", status.id)
+            sleep(0.5)
+
 
 def dm_batch(t_api):
-    print "You are about to Delete all RECEIEVED DMs from the account @%s." % t_api.verify_credentials().screen_name
-    print "Does this sound ok? There is no undo! Type yes to carry out this action."
-    do_delete = raw_input("> ")
-    if do_delete.lower() == 'yes':
-        direct_messages = tweepy.Cursor(t_api.direct_messages).items()
-        for direct_message in itertools.islice(direct_messages,0,None):
-        #for message in tweepy.Cursor(t_api.direct_messages).items():
+    print("You are about to delete all RECEIVED DMs from @%s." % t_api.verify_credentials().screen_name)
+    print("Type 'yes' to carry out. There is no undo!")
+    do_delete = input("> ").strip()
+    if do_delete.lower() == "yes":
+        direct_messages = tweepy.Cursor(t_api.get_direct_messages).items()
+        for direct_message in itertools.islice(direct_messages, 0, None):
             try:
-                #t_api.destroy_direct_message(message.id)
-                t_api.destroy_direct_message(direct_message.id)
-                print "Deleted:", direct_message.id
-            except:
-                print "Failed to delete:", direct_message.id
+                t_api.delete_direct_message(direct_message.id)
+                print("Deleted:", direct_message.id)
+            except Exception:
+                print("Failed to delete:", direct_message.id)
             sleep(5)
-    return
+
 
 def dm_sent(t_api):
-    print "You are about to Delete all SENT DMs from the account @%s." % t_api.verify_credentials().screen_name
-    print "Does this sound ok? There is no undo! Type yes to carry out this action."
-    do_delete = raw_input("> ")
-    if do_delete.lower() == 'yes':
+    print("You are about to delete all SENT DMs from @%s." % t_api.verify_credentials().screen_name)
+    print("Type 'yes' to carry out. There is no undo!")
+    do_delete = input("> ").strip()
+    if do_delete.lower() == "yes":
         sent_direct_messages = tweepy.Cursor(t_api.sent_direct_messages).items()
-        for direct_message in itertools.islice(sent_direct_messages,0,None):
-        #for message in tweepy.Cursor(t_api.direct_messages).items():
+        for direct_message in itertools.islice(sent_direct_messages, 0, None):
             try:
-                #t_api.destroy_direct_message(message.id)
-                t_api.destroy_direct_message(direct_message.id)
-                print "Deleted:", direct_message.id
-            except:
-                print "Failed to delete:", direct_message.id
+                t_api.delete_direct_message(direct_message.id)
+                print("Deleted:", direct_message.id)
+            except Exception:
+                print("Failed to delete:", direct_message.id)
             sleep(5)
-    return
 
-"""
-def fdelete(t_api, stat):
-    try:
-        t_api.destroy_favorite(stat)
-        print "Deleted:", stat
-    except:
-        print "Failed to delete:", stat
-"""
 
 def favdelete(t_api):
-    print "You are about to Delete all favorites from the account @%s." % t_api.verify_credentials().screen_name
-    print "Does this sound ok? There is no undo! Type yes to carry out this action."
-    do_delete = raw_input("> ")
-    if do_delete.lower() == 'yes':
-        for status in tweepy.Cursor(t_api.favorites).items():
+    print("You are about to delete all favorites from @%s." % t_api.verify_credentials().screen_name)
+    print("Type 'yes' to carry out. There is no undo!")
+    do_delete = input("> ").strip()
+    if do_delete.lower() == "yes":
+        for status in tweepy.Cursor(t_api.get_favorites).items():
             try:
-                t_api.destroy_favorite(status.id)
-                #thread.start_new_thread(fdelete, (t_api, status.id,))
-                print "Deleted:", status.id
-            except:
-                print "Failed to delete:", status.id
+                t_api.remove_favorite(status.id)
+                print("Deleted:", status.id)
+            except Exception:
+                print("Failed to delete:", status.id)
             sleep(1.5)
-    return
+
 
 def twitlookup(t_api):
-    try:
-        conn = db.connect('test.db')
-        c = conn.cursor()
-    except:
-        print '[+]ERROR: Could not connect to db'
+    if db is None:
+        print("[+] ERROR: sqlite3 not available.")
         return
-    targetUsr = raw_input('Please enter a username: ')
+    try:
+        conn = db.connect("test.db")
+        c = conn.cursor()
+        c.execute("CREATE TABLE IF NOT EXISTS twitter (username TEXT, followers INTEGER, lasttweet TEXT)")
+    except Exception:
+        print("[+] ERROR: Could not connect to db")
+        return
 
-  # check if user is in the SQLite db or not
-
-    c.execute('SELECT count(*) FROM twitter WHERE username = (?)',(targetUsr, ))
+    targetUsr = input("Please enter a username: ").strip()
+    c.execute("SELECT count(*) FROM twitter WHERE username = (?)", (targetUsr,))
     data = c.fetchone()[0]
-    if data == 0:
-        try:
-            user = t_api.get_user(targetUsr)
-        except:
-            print 'User does not exist on twitter!'
-            return
-        print 'Username: ', user.screen_name
-        followers = user.followers_count
-        print 'Followers: ', followers
-        tweets = t_api.user_timeline(targetUsr, count=1)
-        for tweet in tweets:
-            lastTweet = tweet.text
-        print 'Latest tweet: \n', lastTweet
-        try:
-            conn.execute("INSERT INTO twitter (username, followers, lasttweet)"
-                         "VALUES (?, ?, ?)",
-                         (targetUsr, followers, lastTweet))
-            conn.commit()
-        except:
-            print '[+]ERROR: Could not update databse'
+
+    user = None
+    lastTweet = ""
+    try:
+        user = t_api.get_user(screen_name=targetUsr)
+    except Exception:
+        print("User does not exist on twitter!")
         conn.close()
         return
-    else:
-        print targetUsr, ' is already in the database.'
-        print 'Updating user information....'
-        user = t_api.get_user(targetUsr)
-        print 'Username: ', user.screen_name
-        followers = user.followers_count
-        print 'Followers: ', followers
-        tweets = t_api.user_timeline(targetUsr, count=1)
-        for tweet in tweets:
-            lastTweet = tweet.text
-        print 'Latest tweet: \n', lastTweet
+
+    print("Username: ", user.screen_name)
+    followers = user.followers_count
+    print("Followers: ", followers)
+    tweets = t_api.user_timeline(screen_name=targetUsr, count=1)
+    for tweet in tweets:
+        lastTweet = tweet.text
+    print("Latest tweet:\n", lastTweet)
+
+    if data == 0:
         try:
-            c.execute('UPDATE twitter set followers = ?, lasttweet ='
-                      '? where username = ?',
-                      (followers, lastTweet, targetUsr))
+            conn.execute(
+                "INSERT INTO twitter (username, followers, lasttweet) VALUES (?, ?, ?)",
+                (targetUsr, followers, lastTweet)
+            )
             conn.commit()
-            conn.close()
-        except:
-            print '[+]ERROR: Could not update databse'
-            return
-        return
+        except Exception:
+            print("[+] ERROR: Could not update database")
+    else:
+        print(targetUsr, " is already in the database. Updating...")
+        try:
+            c.execute(
+                "UPDATE twitter SET followers = ?, lasttweet = ? WHERE username = ?",
+                (followers, lastTweet, targetUsr)
+            )
+            conn.commit()
+        except Exception:
+            print("[+] ERROR: Could not update database")
+    conn.close()
+
 
 def mmenu():
-    print """
+    print("""
     1. Live stream twitter (saved as csv)
     2. Live stream NO LOGGING!
     3. Gather last X tweets from user
@@ -355,4 +293,4 @@ def mmenu():
     11. Delete Received DMs
     12. Delete Sent DMs
     0. Return
-        """
+    """)

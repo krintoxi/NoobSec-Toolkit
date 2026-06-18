@@ -1,48 +1,54 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import urllib.request
+import urllib.error
 
-from bs4 import BeautifulSoup as bsoup
-import urllib
+try:
+    from bs4 import BeautifulSoup as bsoup
+except ImportError:
+    bsoup = None
 
 
 def lookup():
+    if bsoup is None:
+        print("[+] ERROR: beautifulsoup4 not installed. Run: pip3 install beautifulsoup4")
+        return
+
     while True:
         try:
-            url = 'https://isc.sans.edu/api/port/'
-            port = raw_input('Enter port: ')
+            url = "https://isc.sans.edu/api/port/"
+            port = input("Enter port: ").strip()
             fullUrl = url + port
             try:
-                data = urllib.urlopen(fullUrl)
-            except:
-                print 'Could not connect to SANS website.'
-                raise
-            i = bsoup(data)
+                data = urllib.request.urlopen(fullUrl, timeout=10)
+            except Exception:
+                print("Could not connect to SANS website.")
+                return
 
-      # print i
+            i = bsoup(data, "xml")
 
-            serviceUDP = i.html.body.services.udp.service
-            serviceTCP = i.html.body.services.tcp.service
-            udpName = i.html.body.services.udp.findAll('name')[0]
-            tcpName = i.html.body.services.tcp.findAll('name')[0]
             try:
-                print
-                print '----------UDP-----------'
-                print 'UDP Service Name: ' + serviceUDP.string
-                print 'UDP Name: ' + udpName.string
-                print
-            except:
+                serviceUDP = i.html.body.services.udp.service
+                udpName = i.html.body.services.udp.find_all("name")[0]
+                print()
+                print("----------UDP-----------")
+                print("UDP Service Name: " + str(serviceUDP.string))
+                print("UDP Name: " + str(udpName.string))
+                print()
+            except Exception:
                 pass
+
             try:
-                print '----------TCP-----------'
-                print 'TCP Service Name: ' + serviceTCP.string
-                print 'TCP Name: ' + tcpName.string
-                print
-                print
-            except:
+                serviceTCP = i.html.body.services.tcp.service
+                tcpName = i.html.body.services.tcp.find_all("name")[0]
+                print("----------TCP-----------")
+                print("TCP Service Name: " + str(serviceTCP.string))
+                print("TCP Name: " + str(tcpName.string))
+                print()
+            except Exception:
                 pass
-            print '----------END-----------\n'
+
+            print("----------END-----------\n")
+
         except KeyboardInterrupt:
-            raise
-
-
-  # return
+            return

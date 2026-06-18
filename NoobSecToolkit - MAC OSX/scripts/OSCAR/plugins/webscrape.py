@@ -1,56 +1,43 @@
-#!/usr/bin/env python
-
-import urllib2
+#!/usr/bin/env python3
+import urllib.request
+import urllib.error
 import re
-# not all systems have readline...if not, just pass and continue.
+
 try:
-    import readline  # nice when you need to use arrow keys and backspace
-except:
+    import readline
+except ImportError:
     pass
+
 import sys
 
 
 def scrape():
-    site = raw_input("Enter page: ")
-
-    #open site. read so we can read in a string context
-    #test for valid and complete URL
+    site = input("Enter page URL: ").strip()
     try:
-        data = urllib2.urlopen(site).read()
+        data = urllib.request.urlopen(site, timeout=10).read().decode("utf-8", errors="ignore")
     except ValueError:
-        print "INVALID URL: Be sure to include protocol (e.g. HTTP)"
+        print("INVALID URL: Be sure to include protocol (e.g. http://)")
         return
-    
-    #print data
+    except urllib.error.URLError as e:
+        print("Could not connect: " + str(e))
+        return
 
-    #try an open the pattern file.
     try:
-        patternFile = open('config/webscrape.dat', 'r').read().splitlines()
-    except:
-        print "There was an error opening the webscrape.dat file"
-        raise
-    #create counter for counting regex expressions from webscrape.dat
+        patternFile = open("config/webscrape.dat", "r").read().splitlines()
+    except FileNotFoundError:
+        print("Error opening config/webscrape.dat")
+        return
+
     counter = 0
-    #for each loop so we can process each specified regex
     for pattern in patternFile:
         m = re.findall(pattern, data)
-        #m will return as true/false. Just need an if m:
         if m:
-            for i in m:
-                #open output/results file...append because we are cool
-                outfile = open('scrape-RESULTS.txt', 'a')
-            #print m
-                outfile.write(str(i))
-                outfile.write("\n")  # may be needed. can always be removed.
-
-            #close the file..or else
-                outfile.close()
-                counter+=1
-                print "Scrape item " + str(counter) + " successsful. Data output to scrape-RESULTS.txt."
-        else:  # only need an else because m is boolean
-            counter+=1
-            print "No match for item " + str(counter) + ". Continuing."
-            # Continue the loop if not a match so it can go on to the next
-            # sequence
-            # NOTE: you don't *really* need an else here...
+            with open("scrape-RESULTS.txt", "a", encoding="utf-8") as outfile:
+                for i in m:
+                    outfile.write(str(i) + "\n")
+                    counter += 1
+                    print("Scrape item %d successful. Data output to scrape-RESULTS.txt." % counter)
+        else:
+            counter += 1
+            print("No match for item %d. Continuing." % counter)
             continue

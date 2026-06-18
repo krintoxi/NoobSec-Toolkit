@@ -1,9 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os
-import sys, traceback
-    
-url = raw_input('What Service do you want to Mirror?: ')
+import sys
 
-cmd1 = os.system ('wget -m'+url+')
-
+url = input("What Service do you want to Mirror?: ").strip()
+os.system("wget -m " + url)

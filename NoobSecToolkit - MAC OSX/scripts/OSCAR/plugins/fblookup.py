@@ -1,201 +1,138 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#import json
-import urllib2
-import urllib
+import urllib.request
+import urllib.error
+import urllib.parse
 import os
-import thread
+import threading
 from time import sleep
-import requests
 
-# PIL is used to open/process images with python
+try:
+    import requests
+except ImportError:
+    requests = None
 
 try:
     from PIL import Image
-except:
-    print 'PIL/Pillow module is not installed'
-    print 'sudo pip install pillow'
+    PIL_available = True
+except ImportError:
+    PIL_available = False
+    print("PIL/Pillow module is not installed. Run: pip3 install pillow")
 
-
-# instagram lookup gunction. Very basic for now.
 
 def instacheck(usernom):
-
-  # use username from FB profile and try it against instagram
-
-    inst = 'http://instagram.com/' + usernom
+    inst = "https://www.instagram.com/" + usernom + "/"
     try:
-        data = urllib2.urlopen(inst)
-        valid = 1
-    except urllib2.HTTPError:
+        urllib.request.urlopen(inst, timeout=10)
+        valid = True
+    except urllib.error.HTTPError:
+        valid = False
+    except Exception:
+        valid = False
 
-  # If we get a 404/not found, then set valid to 0
-
-        valid = 0
     if valid:
-        print
-        print '---------'
-        print 'Found ' + usernom + ' on instagram too!'
-        print 'Profile link: http://instagram.com/' + usernom
-        print '---------\n'
-    elif not valid:
-        pass
+        print()
+        print("---------")
+        print("Found " + usernom + " on Instagram too!")
+        print("Profile link: https://www.instagram.com/" + usernom + "/")
+        print("---------\n")
 
-
-# download FB profile as a function being called via new thread.
 
 def downloader(a):
-    if not os.path.exists('FBpics'):
-        os.mkdir('FBpics')
-
-  # full url for FB image
-
-    data = 'https://graph.facebook.com/' + a + '/picture?type=large'
-
-  # open the image using urllib
-
-    pic = urllib.urlopen(data)
-
-  # open and write bytes as a jpg. Save image as the user id + .jpg
-
-    f = open('FBpics/' + a + '.jpg', 'wb')
-    f.write(pic.read())
-    f.close()
-    sleep(1)
+    os.makedirs("FBpics", exist_ok=True)
+    data = "https://graph.facebook.com/" + a + "/picture?type=large"
+    try:
+        pic = urllib.request.urlopen(data, timeout=10)
+        with open("FBpics/" + a + ".jpg", "wb") as f:
+            f.write(pic.read())
+        sleep(1)
+    except Exception as e:
+        print("Error downloading profile picture: " + str(e))
 
 
 def FBInfo():
-    FBurl = 'https://graph.facebook.com/'
-    print 'Please enter the username or ID of the target'
-    print 'EX: bobsmith3'
-    userName = raw_input(': ')
-
-  # construct full url for graph lookup
-
+    if requests is None:
+        print("requests library not installed. Run: pip3 install requests")
+        return
+    FBurl = "https://graph.facebook.com/"
+    print("Please enter the username or ID of the target")
+    print("EX: bobsmith3")
+    userName = input(": ").strip()
     fullURL = FBurl + userName
     try:
-        #data = urllib2.urlopen(fullURL)
-        data = requests.get(fullURL)
-        #jsonResponse = json.load(data)
-        #print jsonResponse
-        print data.json()
-        print '\n'
-    except:
-
+        data = requests.get(fullURL, timeout=10)
+        print(data.json())
+        print()
+    except Exception:
         pass
-    return
 
 
 def FBUsr():
-    FBurl = 'https://graph.facebook.com/'
-    peopleInput = raw_input('How many people would you like to lookup?: ')
-    people = 0 # set to 0 to skip if user input is invalid
+    if requests is None:
+        print("requests library not installed. Run: pip3 install requests")
+        return
+    FBurl = "https://graph.facebook.com/"
+    peopleInput = input("How many people would you like to lookup?: ").strip()
+    people = 0
     myCounter = 1
 
-    # validate user input
     try:
         people = int(peopleInput)
     except ValueError:
-        print "INVALID INPUT: Enter a number..."
+        print("INVALID INPUT: Enter a number...")
+        return
 
     while myCounter <= people:
-        print '\n'
-        print 'Please enter the username of the person - type ''exit!'' to quit'
-        print 'EX: bobsmith3'
-        userName = raw_input(': ')
+        print()
+        print("Please enter the username of the person - type 'exit!' to quit")
+        print("EX: bobsmith3")
+        userName = input(": ").strip()
         fullURL = FBurl + userName
 
-        # bail out early if the user chooses to exit
         if userName == "exit!":
             return
 
         try:
-            try:
-                #data = urllib2.urlopen(fullURL)
-                data = requests.get(fullURL)
-            #except urllib2.HTTPError:
-            except:
-                print 'There was an error connecting to Facebook!'
-                return
-
-      # load the JSON response from FB
-
-            #jsonResponse = json.load(data)
+            data = requests.get(fullURL, timeout=10)
             res = data.json()
-            print '\n', '\n', '\n'
-
-      # Try and set the f_link var to the link section of json data..
-      # If not found, then the link will just be something null or
-      # a message
+            print("\n\n")
 
             try:
-                #f_link = jsonResponse['link']
-                #fblink1 = 'https://facebook.com/' + jsonResponse['id']
-                fblink1 = 'https://facebook.com/' + res['id']
-                req = requests.get(fblink1)
-                cookieref = req.cookies['reg_fb_ref']
-                decoded = urllib.unquote(cookieref)
-                f_link = decoded
-            except:
+                fblink1 = "https://facebook.com/" + res.get("id", "")
+                req = requests.get(fblink1, timeout=10)
+                cookieref = req.cookies.get("reg_fb_ref", "")
+                f_link = urllib.parse.unquote(cookieref) if cookieref else fblink1
+            except Exception:
+                f_link = "https://facebook.com/" + res.get("id", "")
 
-        # can still generate link, just will not get username.
+            gender = res.get("gender", "")
+            locale = res.get("locale", "")
 
-                #f_link = 'https://facebook.com/' + jsonResponse['id']
-                f_link = 'https://facebook.com/' + res['id']
+            print("---------------Results-------------------")
+            print(res.get("id", ""), "\n", res.get("name", ""), "\n",
+                  gender, "\n", locale, "\n", f_link, "\n")
+            print("---------------Results-------------------\n")
 
-            try:
-                #gender = jsonResponse['gender']
-                #locale = jsonResponse['locale']
-                gender = res['gender']
-                locale = res['locale']
-            except:
-                gender = ""
-                locale = ""
-            print '---------------Results-------------------'
-            #print jsonResponse['id'], '\n', jsonResponse['name'], '\n', \
-                #gender, '\n', locale, \
-                #'\n', f_link, '\n'
-            print res['id'], '\n', res['name'], '\n', \
-                gender, '\n', locale, \
-                '\n', f_link, '\n'
-            print '---------------Results-------------------\n'
-            #a = jsonResponse['id']
-            a = res['id']
-            dlprof = raw_input('Download Profile Picture?[y/n]: ')
-            if dlprof == 'y' or dlprof == 'Y':
+            a = res.get("id", "")
+            if a:
+                dlprof = input("Download Profile Picture? [y/n]: ").strip().lower()
+                if dlprof == "y":
+                    t = threading.Thread(target=downloader, args=(a,), daemon=True)
+                    t.start()
+                    t.join()
+                    view = input("View downloaded image? [y/n]: ").strip().lower()
+                    if view == "y" and PIL_available:
+                        try:
+                            img = Image.open("FBpics/" + a + ".jpg")
+                            img.show()
+                        except Exception:
+                            print("There was an error opening the file.")
 
-        # start a thread to download the image
-
-                thread.start_new_thread(downloader, (a, ))
-                view = raw_input('View downloaded image?[y/n]: ')
-                if view == 'y' or view == 'Y':
-                    try:
-                        img = Image.open('FBpics/' + a + '.jpg')
-                        img.show()
-                    except:
-                        print 'There was an error opening the file'
-                        pass
-                else:
-                    pass
-            else:
-                pass
-            #if jsonResponse['username']:
-            if res['username']:
-                #usernom = jsonResponse['username']
-                usernom = res['username']
-
-        # thread.start_new_thread(instacheck,(usernom,))
-
-        # Check for the username on instagram-check function
-
+            usernom = res.get("username", "")
+            if usernom:
                 instacheck(usernom)
-
-      # sleep(5)
 
             myCounter += 1
             sleep(2)
-        except:
-
+        except Exception:
             pass
-    return

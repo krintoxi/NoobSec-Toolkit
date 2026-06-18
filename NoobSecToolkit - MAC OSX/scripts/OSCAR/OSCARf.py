@@ -1,198 +1,159 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Python script to aid in the collection of OSINT data"""
 
 """
 ____   ________________   ________
 \   \ /   /_   \_____  \  \_____  \ ______  ______
  \   Y   / |   |/  ____/   /   |   \\____ \/  ___/
-  \     /  |   /       \  /    |    \  |_> >___ \
+  \     /  |   /       \  /    |    \  |_> >___ \\
    \___/   |___\_______ \ \_______  /   __/____  >
                        \/         \/|__|       \/
 v12 operations
 NoobSecToolkit (C.T.F Edition)
 """
 
-#External libraries needed to use oscar:
-#twitter
-#tweepy
-#feedparser
-#shodan
-#readline
-#beautifulsoup
+# External libraries needed:
+# tweepy, twitter, feedparser, shodan, readline, beautifulsoup4
 
-#oscar will automatically try to import first.
-#On exception it will alert the user
-import urllib2
-
+import urllib.request
 import sys
 import os
 import time
 
-
 try:
     import readline
-except:
+except ImportError:
     pass
 try:
     import pyreadline
-except:
+except ImportError:
     pass
 
 if "nt" in os.name:
-    print "Windows Support is in alpha! Proceed with caution!"
+    print("Windows Support is in alpha! Proceed with caution!")
     time.sleep(3)
-else:
-    pass
 
 #################
 # LOCAL IMPORTS #
 #################
 from plugins import *
 
-#----Why 2 twitter libs?----#
-#The auth for the twitter lib is nicer as it can create an auth file
-#to read from. the twitter auth will also open a browser window where
-# you will accept the app to use your twitter account. Read and Write
-#is what it requires. When accepted, you will get a pin to enter into
-# the application. You will not be prompted for a pin after getting a
-#token.
-#----END----#
-# imports for the streaming lib
-
 try:
     import tweepy
     from tweepy.streaming import *
-except:
-    print "[+]ERROR: Unable to import the tweepy library installed!!"
-    print "You will not be able to use the twitter collection side of oscar!"
+except ImportError:
+    print("[+] WARNING: tweepy not installed. Twitter features disabled.")
+    print("    Install with: pip3 install tweepy")
 
-#Twitter lib for AUTH
 try:
     import twitter
     from twitter.oauth import write_token_file, read_token_file
     from twitter.oauth_dance import oauth_dance
-except:
-    print "[+]ERROR: Unable to import the twitter library installed!"
-    print "You will not be able to use the twitter collection side of oscar!"
+except ImportError:
+    print("[+] WARNING: twitter library not installed. Twitter auth features disabled.")
+    print("    Install with: pip3 install twitter")
 
+t_auth = None
+t_api = None
 
 try:
-    #Open file for twitter app auth
-    tappfile = open('auth/'+'twitter_app.dat', 'r')
+    tappfile = open("auth/twitter_app.dat", "r")
     tappline = tappfile.readlines()
     APP_NAME = tappline[1].rstrip()
     CONSUMER_KEY = tappline[3].rstrip()
     CONSUMER_SECRET = tappline[5].rstrip()
     tappfile.close()
 
-    #file that Oauth data is stored
-    TOKEN_FILE = 'auth/'+'token.txt'
+    TOKEN_FILE = "auth/token.txt"
 
     try:
         (oauth_token, oauth_token_secret) = read_token_file(TOKEN_FILE)
-    except IOError, e:
-        print "Please run the setup.py file to get your token file!"
-        exit()
+    except IOError as e:
+        print("Please run the setup.py file to get your token file!")
+        oauth_token = None
+        oauth_token_secret = None
 
-    t_auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-    t_auth.set_access_token(oauth_token, oauth_token_secret)
-    t_api = tweepy.API(t_auth)
-except:
+    if oauth_token:
+        t_auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        t_auth.set_access_token(oauth_token, oauth_token_secret)
+        t_api = tweepy.API(t_auth)
+except Exception:
     t_auth = None
     t_api = None
 
 __author__ = "NinjaSl0th - @ninjasl0th"
 
+
 def main():
     """Main Function"""
-    time.sleep(3)
+    time.sleep(1)
     try:
-        os.system('clear')
+        os.system("clear")
     except Exception:
-        os.system('cls')
+        os.system("cls")
     finally:
         asciis.asciiart()
+
     try:
-        print """
-        NoobSecToolkit(C.T.F Edition)(Open Source Collection And Recon) Framework
-        (OSCARF by: NinjaSl0th )
+        print("""
+        NoobSecToolkit (Open Source Collection And Recon) Framework
+        (OSCARF by: NinjaSl0th)
         ----------------------------------
         (CTRL+C returns back to main menu)
         -------------
         1. Social Networking
         -------------
-        2. Shodan (Needs API Key to be set)
+        2. Shodan (Needs API Key)
         -------------
         3. Network Info
         -------------
-        4. Pastebin Scraper (Not Working)
+        4. Pastebin Scraper
         -------------
-
-        0. Exit 
-        """
-        opt = raw_input("Enter an option: ")
+        0. Exit
+        """)
+        opt = input("Enter an option: ").strip()
         if opt == "1":
             socialMenu()
         elif opt == "2":
             oscrShodan()
             main()
-        elif opt == "6":
-            news()
         elif opt == "3":
             networkMod()
         elif opt == "4":
             pasteScrape()
-        elif opt == "5":
-            webtools()
-            #wscrape()
         elif opt == "0":
-            print "Thanks for using NoobSecToolkit (C.T.F Edition)!"
+            print("Thanks for using NoobSecToolkit!")
             sys.exit(0)
         else:
-            print "Sorry you entered an invalid option!"
+            print("Invalid option!")
             main()
-    except (KeyboardInterrupt):
+    except KeyboardInterrupt:
         main()
 
 
-###########################
-#-- Social Media Menu   --#
-###########################
 def socialMenu():
     """Select Social Media Source"""
-
-    print """
-    1. Check username on instagram
+    print("""
+    1. Check username on Instagram
     0. Return
-    """
-    opt = raw_input("Enter an option: ")
+    """)
+    opt = input("Enter an option: ").strip()
     if opt == "1":
-        twitMenu()
-    elif opt == "2":
-        fbMenu()
-    elif opt == "3":
-        linkedin()
-    elif opt == "4":
         instachek()
     elif opt == "0":
         main()
     else:
-        print "You entered an invalid choice!"
+        print("Invalid choice!")
         socialMenu()
-
-
-###########################
-#-- Twitter Collection -- #
-###########################
 
 
 def twitMenu():
     """Menu for twitter"""
     if t_auth is None or t_api is None:
-        print "Twitter is disabled; please install an API key for twitter"
+        print("Twitter is disabled; please install an API key for twitter.")
         return
     oscrtwitter.mmenu()
-    opt = raw_input("Enter an option: ")
+    opt = input("Enter an option: ").strip()
     if opt == "1":
         oscrtwitter.lv_stream(t_auth)
     elif opt == "2":
@@ -230,22 +191,18 @@ def twitMenu():
     elif opt == "0":
         main()
     else:
-        print "[+]ERROR: You entered an invalid option!"
+        print("[+] ERROR: Invalid option!")
         twitMenu()
 
 
-########################
-## --- FB Analysis -- ##
-########################
-
 def fbMenu():
     """Facebook Menu"""
-    print """
-    1. Get user info - Raw JSON Dump/Not Formatted
+    print("""
+    1. Get user info - Raw JSON Dump
     2. Get user info - Formatted, Lookup multiple users
     0. Return
-    """
-    opt = raw_input("Enter an input: ")
+    """)
+    opt = input("Enter an option: ").strip()
     if opt == "1":
         fblookup.FBInfo()
         fbMenu()
@@ -255,19 +212,15 @@ def fbMenu():
     elif opt == "0":
         main()
     else:
-        print "You entered an invalid option"
+        print("Invalid option.")
         fbMenu()
 
 
 def instachek():
     """Initiate Instagram username checker"""
-    usernom = raw_input("Enter username: ")
+    usernom = input("Enter username: ").strip()
     instag.checker(usernom)
     socialMenu()
-
-#############################
-#-- News Feed Integration --#
-#############################
 
 
 def news():
@@ -276,13 +229,9 @@ def news():
     main()
 
 
-###############
-#-- IP Info --#
-###############
 def ipInfo():
     """IP Address lookup function"""
-    ip = raw_input("Enter IP: ")
-    ip = ip.rstrip()
+    ip = input("Enter IP: ").strip()
     ipinfo.lookup(ip)
     networkMod()
 
@@ -295,30 +244,27 @@ def prtLook():
 
 def networkMod():
     """Function to choose what network lookup tool to use"""
-    print """
+    print("""
     1. Lookup IP Address
-    2. Port Lookup (SANS website)
+    2. Port Lookup
     3. Domain to IP
     0. Return
-    """
-    opt = raw_input('Enter an option: ')
+    """)
+    opt = input("Enter an option: ").strip()
     if opt == "1":
         ipInfo()
     elif opt == "2":
         prtLook()
     elif opt == "3":
         domainip.c()
+        networkMod()
     elif opt == "0":
         main()
     else:
-        print "Invalid option!"
+        print("Invalid option!")
         networkMod()
-    networkMod()
 
 
-######################
-#- Pastebin Scraper -#
-######################
 def pasteScrape():
     """Initiate pastebin scraper"""
     try:
@@ -348,30 +294,30 @@ def wscrape():
     webscrape.scrape()
     main()
 
+
 def getcn():
     sslscan.starter()
 
+
 def webtools():
     """Menu for web tools"""
-    print """
+    print("""
     1. Web Source Scraper
-    2. SSL CN grabber
-
+    2. SSL CN Grabber
     0. Back
-    """
-    opt = raw_input("Enter an option: ")
+    """)
+    opt = input("Enter an option: ").strip()
     if opt == "1":
         wscrape()
     elif opt == "2":
         getcn()
+        webtools()
     elif opt == "0":
         main()
     else:
-        print "Invalid Option!"
+        print("Invalid Option!")
         webtools()
-    webtools()
 
 
 if __name__ == "__main__":
-    # users may wish to import part of this...
     main()

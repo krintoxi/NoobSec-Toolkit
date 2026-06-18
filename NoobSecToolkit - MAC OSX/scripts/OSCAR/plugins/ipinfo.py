@@ -1,71 +1,45 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#import urllib2
-#import json
 import time
 import webbrowser
-import requests
+
+try:
+    import requests
+except ImportError:
+    requests = None
 
 
 def lookup(ip):
+    if requests is None:
+        print("[+] ERROR: requests library not installed. Run: pip3 install requests")
+        return
 
-    ipUrl = 'http://ip-api.com/json/'
+    ipUrl = "http://ip-api.com/json/"
     ip_query = ipUrl + ip
     try:
-        #data = urllib2.urlopen(ip_query)
-        #jsonResponse = json.load(data)
-        data = requests.get(ip_query)
+        data = requests.get(ip_query, timeout=10)
         jsonResponse = data.json()
-        print
-        print '-- IP Results --'
-        print 'IP: ', jsonResponse['query']
-        print 'ISP: ', jsonResponse['isp']
-        print 'ASN: ', jsonResponse['as']
-        print 'Country: ', jsonResponse['country']
-        print 'City: ', jsonResponse['city']
-        print 'Region: ', jsonResponse['regionName']
-        print 'Longitude: ', jsonResponse['lon']
-        print 'Latitude: ', jsonResponse['lat']
-        print '-- END --'
-        print
-    except:
-        print '[+]ERROR: Could not connect to IP lookup site. Trying another!'
-        try:
-            ipUrl = 'https://freegeoip.net/json/'
-            ip_query = ipUrl + ip
-            #data = urllib2.urlopen(ip_query)
-            #jsonResponse = json.load(data)
-            data = requests.get(ip_query)
-            jsonResponse = data.json()
-            print
-            print '-- IP Results --'
-            print 'IP: ', jsonResponse['ip']
-            print 'Country: ', jsonResponse['country_name']
-            print 'City: ', jsonResponse['city']
-            print 'Region: ', jsonResponse['region_name']
-            print 'Longitude: ', jsonResponse['longitude']
-            print 'Latitude: ', jsonResponse['latitude']
-            print '-- END --'
-            print
-        except:
-            print 'Could not connect to second lookup site!'
-            raise
+        print()
+        print("-- IP Results --")
+        print("IP: ", jsonResponse.get("query", "N/A"))
+        print("ISP: ", jsonResponse.get("isp", "N/A"))
+        print("ASN: ", jsonResponse.get("as", "N/A"))
+        print("Country: ", jsonResponse.get("country", "N/A"))
+        print("City: ", jsonResponse.get("city", "N/A"))
+        print("Region: ", jsonResponse.get("regionName", "N/A"))
+        print("Longitude: ", jsonResponse.get("lon", "N/A"))
+        print("Latitude: ", jsonResponse.get("lat", "N/A"))
+        print("-- END --")
+        print()
+    except Exception:
+        print("[+] ERROR: Could not connect to IP lookup site.")
 
-  # wait 3 seconds until going back to the main menu
-
-    time.sleep(3)
-    avcheck = \
-        raw_input('Check IP with AlienVault (opens in browser) [y/n]: ')
-    if avcheck == 'y' or avcheck == 'Y':
+    time.sleep(2)
+    avcheck = input("Check IP with AlienVault (opens in browser) [y/n]: ").strip()
+    if avcheck.lower() == "y":
         alienvault(ip)
-    else:
-        pass
-    return
 
 
 def alienvault(ip):
-    n = 2
-    url = 'http://www.alienvault.com/apps/rep_monitor/ip/' + ip
-    webbrowser.open(url, new=n)
-    return
+    url = "https://otx.alienvault.com/indicator/ip/" + ip
+    webbrowser.open(url, new=2)

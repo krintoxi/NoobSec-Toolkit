@@ -1,23 +1,25 @@
-#!/usr/bin/env python
-"""Module to check if a username returns to a valid instagram user"""
-import urllib2
+#!/usr/bin/env python3
+"""Module to check if a username returns a valid instagram user."""
+import urllib.request
+import urllib.error
 
 
 def checker(usernom):
-    """Check username. Send data to instagram and check status code."""
-    #use username from FB profile and try it against instagram
-    inst = "http://instagram.com/"+usernom
+    """Check username against Instagram."""
+    inst = "https://www.instagram.com/" + usernom + "/"
     try:
-        data = urllib2.urlopen(inst)
+        urllib.request.urlopen(inst, timeout=10)
         valid = True
-        #If we get a 404/not found, then set valid to 0
-    except urllib2.HTTPError:
+    except urllib.error.HTTPError as e:
+        valid = e.code != 404
+    except Exception:
         valid = False
+
     if valid:
-        print
-        print "---------"
-        print "Found "+usernom+" on instagram!"
-        print "Profile link: http://instagram.com/"+usernom
-        print "---------\n"
-    elif not valid:
-        return
+        print()
+        print("---------")
+        print("Found " + usernom + " on Instagram!")
+        print("Profile link: https://www.instagram.com/" + usernom + "/")
+        print("---------\n")
+    else:
+        print("Username '" + usernom + "' not found on Instagram.")

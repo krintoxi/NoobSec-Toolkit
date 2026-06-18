@@ -1,16 +1,14 @@
-#!/usr/bin/env python
-"""Module to get the ip address of a given domain."""
-#import socket :P -- Now that is how you comment in code.
+#!/usr/bin/env python3
+"""Module to get the IP address of a given domain."""
 import socket
 
+
 def c():
-    """Get ipaddress of domain..GO DNS!"""
-    domain = raw_input("Domain: ")
-    #try to resolve.
+    """Get IP address of domain."""
+    domain = input("Domain: ").strip()
     try:
         chk = socket.gethostbyname_ex(domain)
     except Exception:
-        print "[+]ERROR: could not get hostname!"
-        raise
-    print "\nIP Address of", domain, ":", chk[2], "\n"
-    return
+        print("[+] ERROR: could not get hostname!")
+        return
+    print("\nIP Address of", domain, ":", chk[2], "\n")
