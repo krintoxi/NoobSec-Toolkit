@@ -1,9 +1,9 @@
-Pillow==2.6.1
+Pillow>=12.3.0
 click==3.3
 mechanize==0.2.5
 readline==6.2.4.1
 simplejson==3.6.4
 enum34==1.0.4
 ipaddr==2.1.11
-pyOpenSSL==0.14
+pyOpenSSL>=26.0.0
 timeout==0.1.2

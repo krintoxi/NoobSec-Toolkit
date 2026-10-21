@@ -1,9 +1,9 @@
-Pillow==2.6.1
+Pillow>=12.3.0
 readline==6.2.4.1
-requests==2.4.3
+requests>=2.33.0
 shodan==1.1.2
 simplejson==3.6.4
-cryptography==0.8
+cryptography>=48.0.1
 dnspython==1.12.0
 enum34==1.0.4
 ipaddr==2.1.11
