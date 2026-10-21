@@ -1,6 +1,6 @@
 Pillow>=12.3.0
 click==3.3
-mechanize==0.2.5
+mechanize>=0.4.6
 readline==6.2.4.1
 simplejson==3.6.4
 enum34==1.0.4
